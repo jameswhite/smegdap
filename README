@@ -11,3 +11,32 @@ tar xvzf Catalyst-Model-LDAP-0.17.tar.gz
 (cd Catalyst-Model-LDAP-0.17; dh-make-perl)
 (cd Catalyst-Model-LDAP-0.17; debian/rules binary)
 dpkg -i libcatalyst-model-ldap-perl_0.17-1_all.deb
+
+## Layout                         ## Menu Options
+ + Connections                    -> create connection, folder
+ |  + Group                       -> create connection, folder
+ |  |  + Group                    -> create connection, folder
+ |  |  |   . Server0              -> edit attributes
+ |  |  + Server1                  -> edit attributes
+ |  + ServerN                     -> edit attributes
+ |     + dc=example,dc=org        -> edit attributes, ACLs
+ |     |  + ou=Group              -> edit attributes
+ |     |  |  + cn=video           -> edit attributes
+ |     |  + ou=Hosts              -> edit attributes
+ |     |  + ou=People             -> edit attributes
+ |     |  |  + uid=username       -> edit attributes
+ |     |  + ou=Sets               -> edit attributes
+ |     |  + ou=Special            -> edit attributes
+ |     |  + dc=sub                -> edit attributes, ACLs
+ |     |     + ou=Group           -> edit attributes
+ |     |     |  + cn=video        -> edit attributes
+ |     |     + ou=Hosts           -> edit attributes
+ |     |     + ou=People          -> edit attributes
+ |     |     |  + uid=username    -> edit attributes
+ |     |     + ou=Sets            -> edit attributes
+ |     |     + ou=Special         -> edit attributes
+ |     |     + dc=sub             -> edit attributes, ACLs
+ |     |        + ...etc
+ |     + dc=example,dc=com        -> edit attributes, ACLs
+ |     + dc=example,dc=net        -> edit attributes, ACLs
+ + Logout

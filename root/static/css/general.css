@@ -21,12 +21,10 @@ body{
     cursor:default;  
     overflow: hidden;  
 }  
-/*
 html,body{  
     height:100%;  
     text-align: center;  
 }  
-*/
 .clear{  
     clear: both;  
     height: 0;  
@@ -43,6 +41,9 @@ a{
     display: block;  
 }  
 /******* /LOGO  *******/
+#certificate_tree{
+    text-align: left;
+}
 /*
 #certificate_tree li{
     float: left;  

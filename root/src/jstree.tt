@@ -15,5 +15,6 @@ function tree()     {
                                                                           }
                                                                     }
                                                     });
+                      $("#certificate_tree").jstree("set_theme","apple");
                     }
 </script>

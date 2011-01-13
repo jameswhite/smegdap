@@ -65,17 +65,26 @@ sub jstreemenu : Local {
     my $menu_tree;
     #my $certificate_tree=$c->model('Certificates')->tree();
     #if($c->check_user_roles( "certificate_administrators" )){
-    push( @{ $menu_tree },
-          {
-            'attributes' => { 'id' =>  unpack("H*","new_cert") },
-            'data' => { 'title' => 'My Certificate', 'icon' => 'file'},
-          }
-        );
-    push( @{ $menu_tree },
-          {
-            'attributes' => { 'id' =>  unpack("H*","logout") },
-            'data' => { 'title' => 'Logout', 'icon' => 'forbidden'},
-          }
+    push( @{ $menu_tree }, [
+                             {
+                               'attributes' => { 'id' =>  unpack("H*","connection_list") },
+                               'data' => { 'title' => 'Connections', 'icon' => 'closed'},
+                               'children' => [
+                                               {
+                                                 'attributes' => { 'id' =>  unpack("H*","new_cert1") },
+                                                 'data' => { 'title' => 'faraday.eftdomain.net', 'icon' => 'server'},
+                                               },
+                                               {
+                                                 'attributes' => { 'id' =>  unpack("H*","new_cert2") },
+                                                 'data' => { 'title' => 'maxwell.eftdomain.net', 'icon' => 'server'},
+                                               },
+                                             ]
+                             },
+                             {
+                               'attributes' => { 'id' =>  unpack("H*","logout") },
+                               'data' => { 'title' => 'Logout', 'icon' => 'leave'},
+                             },
+                           ]
         );
     $c->res->body($self->json_wrap($menu_tree, {'pretty' => 1}));
 }
