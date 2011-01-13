@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">  
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+        
+        <title>smegdap -- ldap group manager for enterprise systems</title>  
+        <script type="text/javascript" src="static/js/jquery-1.4.4.js"></script>
+        <!-- begin resizing app -->
+<script>
+    function styleResize(){
+        var browserWidth = 0, browserHeight = 0;
+        if( typeof( window.innerWidth ) == 'number' ) {
+            //Non-IE
+            browserWidth = window.innerWidth;
+            browserHeight = window.innerHeight;
+        }else if(document.documentElement&&(document.documentElement.clientWidth||document.documentElement.clientHeight)){
+            //IE 6+ in 'standards compliant mode'
+              browserWidth = document.documentElement.clientWidth;
+              browserHeight = document.documentElement.clientHeight;
+        }else if(document.body&&(document.body.clientWidth||document.body.clientHeight)){
+              //IE 4 compatible
+              browserWidth = document.body.clientWidth;
+              browserHeight = document.body.clientHeight;
+        }
+        // why are these conversions necessary?
+        var newAppHeight = browserHeight - 100;
+        var newAppHeightStr = newAppHeight + "px";
+        document.getElementById("smegdap_app").style.height = newAppHeightStr;
+        $('vsplitbar').height = newAppHeightStr;
+    }
+</script>
+<!-- end resizing app -->
+
+        <!-- begin jquery vertical splitter http://www.methvin.com/splitter/vsplitter.html -->
+<script type="text/javascript" src="static/js/splitter.js"></script>
+<script type="text/javascript" src="static/js/jquery.cookie.js"></script>
+<link rel="stylesheet" href="static/css/general.css" type="text/css" media="screen" />
+<!--[if IE 6]>
+    <link rel="stylesheet" href="static/css/ie6.css" type="text/css" media="screen," />
+<![endif]-->
+
+<style type="text/css" media="all">
+    body { padding: 10px; }
+    #smegdap_app { height: window.innerHeight + 'px' ; margin: 1em 1em; border: 4px solid #dde7f0; /* No padding allowed */ }
+    #left-pane { background: #fff; overflow: auto; /* No margin or border allowed */ }
+    #right-pane { background: #fff; overflow: auto; /* No margin or border allowed */ }
+    #smegdap_app .vsplitbar { width: 3px; background: #dde7f0 url(static/images/vgrabber.gif) no-repeat center; }
+    #smegdap_app .vsplitbar.active { background: #dde7f0 url(static/images/vgrabber.gif) no-repeat center; opacity: 0.7; }
+</style>
+
+<script type="text/javascript">
+   function splitter() {
+                          $("#smegdap_app").splitter({ 
+                                                     type: 'v',
+                                                     outline: true,
+                                                     minLeft: 100, sizeLeft: 150, minRight: 100,
+                                                     resizeToWidth: true,
+                                                     cookie: "vsplitter",
+                                                     accessKey: 'I'
+                                                   });
+                        }
+</script>
+<!-- end jquery vertical splitter -->
+
+        <link rel="stylesheet" type="text/css" href="static/js/themes/default/style.css">
+<script type="text/javascript" src="static/js/jquery.jstree.js"></script>
+
+<script type="text/javascript">
+function tree()     {
+                      $("#certificate_tree").jstree({
+                                                      core : { },
+                                                      plugins : [ "themes", "json_data" ],
+                                                      "json_data" : {
+                                                                      "ajax" : { 
+                                                                                 "url"  : "jstree",
+                                                                                 "data" : function(n) {
+                                                                                              return n;
+                                                                                          }
+                                                                          }
+                                                                    }
+                                                    });
+                    }
+</script>
+
+        <!-- begin init -->
+        <script type="text/javascript">
+        $( function() { tree(); });
+        </script>
+        <!-- end init -->
+    </head>  
+    <body onload="styleResize()" onresize="styleResize();">  
+        <a id="logo" title="smegdap" href="http://github.com/fapestniegd/smegdap"><img src="static/images/logo.jpg" alt="[LOGO]" /></a>  
+        <div id="smegdap_app">
+            <div id="left-pane">
+
+                         <div id="certificate_tree" class="tree-default" style="">
+         </div>
+
+
+            </div>
+            <div id="right-pane">
+                <p> we're gonna put our form to populate here based on what's selected in the tree. </p>
+            </div>
+        </div>
+
+    </body>  
+</html>  

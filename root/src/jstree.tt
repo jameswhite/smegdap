@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="static/js/themes/default/style.css">
+<script type="text/javascript" src="static/js/jquery.jstree.js"></script>
+
+<script type="text/javascript">
+function tree()     {
+                      $("#certificate_tree").jstree({
+                                                      core : { },
+                                                      plugins : [ "themes", "json_data" ],
+                                                      "json_data" : {
+                                                                      "ajax" : { 
+                                                                                 "url"  : "jstree",
+                                                                                 "data" : function(n) {
+                                                                                              return n;
+                                                                                          }
+                                                                          }
+                                                                    }
+                                                    });
+                    }
+</script>

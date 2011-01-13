@@ -3,7 +3,13 @@ package smegdap::View::TT;
 use strict;
 use base 'Catalyst::View::TT';
 
-__PACKAGE__->config(TEMPLATE_EXTENSION => '.tt');
+__PACKAGE__->config(
+                     TEMPLATE_EXTENSION => '.tt',
+                     INCLUDE_PATH => [ 
+                                       smegdap->path_to( 'root', 'src' ),
+                                     ],
+
+                   );
 
 =head1 NAME
 

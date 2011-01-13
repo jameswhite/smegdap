@@ -1,0 +1,25 @@
+<!-- begin resizing app -->
+<script>
+    function styleResize(){
+        var browserWidth = 0, browserHeight = 0;
+        if( typeof( window.innerWidth ) == 'number' ) {
+            //Non-IE
+            browserWidth = window.innerWidth;
+            browserHeight = window.innerHeight;
+        }else if(document.documentElement&&(document.documentElement.clientWidth||document.documentElement.clientHeight)){
+            //IE 6+ in 'standards compliant mode'
+              browserWidth = document.documentElement.clientWidth;
+              browserHeight = document.documentElement.clientHeight;
+        }else if(document.body&&(document.body.clientWidth||document.body.clientHeight)){
+              //IE 4 compatible
+              browserWidth = document.body.clientWidth;
+              browserHeight = document.body.clientHeight;
+        }
+        // why are these conversions necessary?
+        var newAppHeight = browserHeight - 100;
+        var newAppHeightStr = newAppHeight + "px";
+        document.getElementById("smegdap_app").style.height = newAppHeightStr;
+        $('vsplitbar').height = newAppHeightStr;
+    }
+</script>
+<!-- end resizing app -->

@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">  
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />  
+        [% refreshto %]
+        <title>smegdap -- ldap group manager for enterprise systems</title>  
+        <script type="text/javascript" src="static/js/jquery-1.4.4.js"></script>
+        [% INCLUDE styleResize.tt %]
+        [% INCLUDE splitter.tt %]
+        [% INCLUDE jstree.tt %]
+        <!-- begin init -->
+        <script type="text/javascript">
+        $( function() { styleResize(); splitter (); tree(); });
+        </script>
+        <!-- end init -->
+    </head>  
+    <body onload="styleResize()" onresize="styleResize();">  
+        <a id="logo" title="smegdap" href="http://github.com/fapestniegd/smegdap"><img src="static/images/logo.jpg" alt="[LOGO]" /></a>  
+        <div id="smegdap_app">
+            <div id="left-pane">
+                [% INCLUDE treebox.tt %]
+            </div>
+            <div id="right-pane">
+                <p> we're gonna put our form to populate here based on what's selected in the tree. </p>
+            </div>
+        </div>
+    </body>  
+</html>  

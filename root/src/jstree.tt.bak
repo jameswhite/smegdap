@@ -1,0 +1,79 @@
+    <link rel="stylesheet" type="text/css" href="static/js/themes/default/style.css">
+    <script type="text/javascript" src="static/js/jquery.jstree.js"></script>
+    <script type="text/javascript">
+    function tree()     {
+                          $("#certificate_tree").jstree({
+                                                          selected: "[% selected %]",
+                                                          types : {
+                                                                  // all node types inherit the "default" node type
+                                                                  "default" : {
+                                                                                draggable : false,
+                                                                                deletable : false,
+                                                                                renameable : false
+                                                                               },
+                                                                  "action" :   {
+                                                                                 draggable : false,
+                                                                                 valid_children : "none",
+                                                                                 max_children : 0,
+                                                                                 max_depth : 0,
+                                                                                 icon : {
+                                                                                          image : "static/images/drive.png"
+                                                                                        }
+                                                                               },
+                                                                  "folder" :   {
+                                                                                 draggable : false,
+                                                                                 valid_children : [ "folder", "file", "action" ],
+                                                                               },
+                                                                  "file" :     {
+                                                                                 draggable : false,
+                                                                                 valid_children : "none",
+                                                                                 max_children : 0,
+                                                                                 max_depth : 0,
+                                                                                 icon : {
+                                                                                          image : "static/images/file.png"
+                                                                                        }
+                                                                                },
+                                                                },
+                                                        opened : [   
+                                                                     [% FOREACH open_branch IN open_branches %] "[% open_branch %]", [% END %]
+                                                                 ],
+                                                        data: { 
+                                                                type: "json",
+                                                                async: true,
+                                                                opts: { method: "POST", url:"jstree/" }
+                                                              },
+                                                        ui:   { theme_name: "default"},
+                                                        callback: {
+                                                                    onopen: function(node,tree_obj)
+                                                                    {
+                                                                      $.ajax({
+                                                                               type: 'POST',
+                                                                               url: 'action/open/' + node.id ,
+                                                                               dataType: "json",
+                                                                             });
+                                                                    },
+                                                                    onclose: function(node,tree_obj)
+                                                                    {
+                                                                      $.ajax({
+                                                                               type: 'POST',
+                                                                               url: 'action/close/' + node.id ,
+                                                                               dataType: "json",
+                                                                             });
+                                                                    },
+                                                                    onselect: function(node,tree_obj)
+                                                                    {
+                                                                      $.ajax({
+                                                                               type: 'POST',
+                                                                               url: 'action/select/' + node.id ,
+                                                                               dataType: "html",
+                                                                               success: function(data){
+                                                                                                        $('#right-pane').html(data);
+                                                                                                        //tabs();
+                                                                                                        //activate(active_tab);
+                                                                                                      }
+                                                                             });
+                                                                    },
+                                                                  }
+                                                      });
+                        }
+    </script>
