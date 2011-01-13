@@ -1,1 +1,13 @@
-Run script/smegdap_server.pl to test the application.
+## Building Prerequisites on debian 5.0.7 (lenny)
+    apt-get install -y dh-make-perl                                            \
+                       libcatalyst-perl libcatalyst-modules-perl               \
+                       libcatalyst-modules-extra-perl                          \
+                       libnet-ldap-perl libnet-ldap-server-perl                \
+                       libconvert-asn1-perl libmoose-perl
+
+################################################################################
+http://search.cpan.org/CPAN/authors/id/D/DA/DANIELTWC/Catalyst-Model-LDAP-0.17.tar.gz
+tar xvzf Catalyst-Model-LDAP-0.17.tar.gz
+(cd Catalyst-Model-LDAP-0.17; dh-make-perl)
+(cd Catalyst-Model-LDAP-0.17; debian/rules binary)
+dpkg -i libcatalyst-model-ldap-perl_0.17-1_all.deb
