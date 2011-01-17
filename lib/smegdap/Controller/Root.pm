@@ -52,19 +52,25 @@ sub default :Path {
             $c->forward('jstreemenu');
             $c->detach();
         }elsif( $c->request->arguments->[0] eq "form" ){
-             $c->forward('selectform');
-             $c->detach();
+            $c->forward('selectform');
+            $c->detach();
+        }elsif( $c->request->arguments->[0] eq "contextmenu" ){
+            $c->forward('contextmenu');
+            $c->detach();
         }elsif( $c->request->arguments->[0] eq "select" ){
+            $c->response->headers->header( 'content-type' => "application/json" );
             $c->res->body($self->json_wrap({'status' => 1}));
         }elsif( $c->request->arguments->[0] eq "rename" ){
+            $c->response->headers->header( 'content-type' => "application/json" );
             $c->res->body($self->json_wrap({'status' => 1}));
         }else{
-            $c->stash->{'template'}="application.tt";
+            $c->response->headers->header( 'content-type' => "application/json" );
+            $c->res->body($self->json_wrap({'status' => 1}));
+            #$c->stash->{'template'}="application.tt";
         }
     }else{
         $c->stash->{'template'}="application.tt";
     }
-    
 }
 
 sub jstreemenu : Local {
@@ -117,12 +123,70 @@ sub jstreemenu : Local {
                              },
                            ]
         );
+    $c->response->headers->header( 'content-type' => "application/json" );
     $c->res->body($self->json_wrap($menu_tree, {'pretty' => 1}));
 }
 
 sub selectform : Local {
     my ( $self, $c ) = @_;
     $c->res->body(join("/", @{ $c->request->arguments }));
+}
+
+sub contextmenu : Local {
+    my ( $self, $c ) = @_;
+    my $json='{ "create" : { 
+                             "separator_before" : false,
+                             "separator_after"  : true,
+                             "label"            : "create",
+                             "action"           : function (obj) { this.create(obj); }
+                           },
+              }';
+#                "rename" : {
+#                          "separator_before" : false,
+#                          "separator_after"  : false,
+#                          "label"            : "rename",
+#                          "action"           : function (obj) { this.rename(obj); }
+#                  },
+#               "remove" : {
+#                          "separator_before" : false,
+#                          "icon"             : false,
+#                          "separator_after"  : false,
+#                          "label"            : "delete",
+#                          "action"           : function (obj) { this.remove(obj); }
+#                  },
+#               "ccp" : {
+#                          "separator_before" : true,
+#                          "icon"             : false,
+#                          "separator_after"  : false,
+#                          "label"            : "edit",
+#                          "action"           : false,
+#                          "submenu"          : { 
+#                                                 "cut"   : { 
+#                                                             "separator_before" : false,
+#                                                             "separator_after"  : false,
+#                                                             "label"            : "cut",
+#                                                             "action"           : function (obj) { this.cut(obj); }
+#                                                           },
+#                                                 "copy"  : { 
+#                                                             "separator_before" : false,
+#                                                             "icon"             : false,
+#                                                             "separator_after"  : false,
+#                                                             "label"            : "copy",
+#       "action"           : function (obj) { this.copy(obj); }
+#                                                           },
+#                                                 "paste" : { 
+#                                                             "separator_before" : false,
+#                                                             "icon"             : false,
+#                                                             "separator_after"  : false,
+#                                                             "label"            : "paste",
+#                                                             "action"           : function (obj) { this.paste(obj); }
+#                                                           }
+#                          }
+#                   }
+#    }';
+    $c->response->headers->header( "content-type" => "application/json" );
+    $c->res->body($json);
+
 }
 
 =head2 end

@@ -12,217 +12,244 @@
 #alog { font-size:9px !important; margin:5px; border:1px solid silver; }
 </style>
 <script type="text/javascript">
-function tree()     {
-                      $("#certificate_tree")
-                          .jstree({
-                                    core : { },
-                                    plugins : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
-                                    "json_data" : {
-                                                    "ajax" : { 
-                                                               "url"  : "jstree",
-                                                               "data" : function(n) { 
-                                                                                      return n; 
-                                                                                    },
-                                                             }
-                                                  },
-                                    "types" :     {
-                                                    "max_depth" : -2,
-                                                    "max_children" : -2,
-                                                    "valid_children" : ["drive"],
-                                                    "types" :     {
-                                         
-                                                                    "default" : {
-                                                                                  "valid_children" : "none",
-                                                                                  "icon" : {
-                                                                                            "image" : "static/images/file.png"
-                                                                                           }
-                                                                                },
-                                                                    "folder"  : {
-                                                                                  "valid_children" : [ "default", "folder" ],
-                                                                                  "icon" : {
-                                                                                           "image" : "static/images/folder.png"
-                                                                                           }
-                                                                                },
-                                                                    "drive"   : {
-                                                                                  "valid_children" : [ "default", "folder" ],
-                                                                                  "icon" : {
-                                                                                             "image" : "static/images/root.png"
-                                                                                           },
-                                                                                  "start_drag" : false,
-                                                                                  "move_node" : false,
-                                                                                  "delete_node" : false,
-                                                                                  "remove" : false
-                                                                                }
-                                                                }
-                                                  },
+function contextMenu(clickeditem){
+    if(clickeditem[0].id == "conn"){
+    return {
+             "create" : {
+                          "separator_before" : false,
+                          "separator_after"  : true,
+                          "label"            : "create",
+                          "action"           : function (obj) { this.create(obj); }
+                  },
+                  "rename" : {
+                          "separator_before" : false,
+                          "separator_after"  : false,
+                          "label"            : "rename",
+                          "action"           : function (obj) { this.rename(obj); }
+                  },
+                  "remove" : {
+                          "separator_before" : false,
+                          "icon"             : false,
+                          "separator_after"  : false,
+                          "label"            : "delete",
+                          "action"           : function (obj) { this.remove(obj); }
+                  },
+                  "ccp" : {
+                          "separator_before" : true,
+                          "icon"             : false,
+                          "separator_after"  : false,
+                          "label"            : "edit",
+                          "action"           : false,
+                          "submenu"          : {
+                                                 "cut"   : {
+                                                             "separator_before" : false,
+                                                             "separator_after"  : false,
+                                                             "label"            : "cut",
+                                                             "action"           : function (obj) { this.cut(obj); }
+                                                           },
+                                                 "copy"  : {
+                                                             "separator_before" : false,
+                                                             "icon"             : false,
+                                                             "separator_after"  : false,
+                                                             "label"            : "copy",
+                                                             "action"           : function (obj) { this.copy(obj); }
+                                                           },
+                                                 "paste" : {
+                                                             "separator_before" : false,
+                                                             "icon"             : false,
+                                                             "separator_after"  : false,
+                                                             "label"            : "paste",
+                                                             "action"           : function (obj) { this.paste(obj); }
+                                                           }
+                          }
+                   }
+    }
+    }
+};
 
-                                           "ui" : {
-				                    "initially_select" : [ [% SELECTED_LIST %] ]
-			                          },
-                                    "contextmenu":{      
-                                                    select_node : false, // requires UI plugin
-                                                    show_at_node : true,
-                                                    items:{   // Could be a function that should return an object like this one
-                                                            "create" : {
-                                                                    "separator_before"      : false,
-                                                                    "separator_after"       : true,
-                                                                    "label"                         : "create",
-                                                                    "action"                        : function (obj) { this.create(obj); }
-                                                            },
-                                                            "rename" : {
-                                                                    "separator_before"      : false,
-                                                                    "separator_after"       : false,
-                                                                    "label"                         : "rename",
-                                                                    "action"                        : function (obj) { this.rename(obj); }
-                                                            },
-                                                            "remove" : {
-                                                                    "separator_before"      : false,
-                                                                    "icon"                          : false,
-                                                                    "separator_after"       : false,
-                                                                    "label"                         : "delete",
-                                                                    "action"                        : function (obj) { this.remove(obj); }
-                                                            },
-                                                            "ccp" : {
-                                                                    "separator_before"      : true,
-                                                                    "icon"                          : false,
-                                                                    "separator_after"       : false,
-                                                                    "label"                         : "edit",
-                                                                    "action"                        : false,
-                                                                    "submenu" : {
-                                                                            "cut" : {
-                                                                                    "separator_before"      : false,
-                                                                                    "separator_after"       : false,
-                                                                                    "label"                         : "cut",
-                                                                                    "action"                        : function (obj) { this.cut(obj); }
-                                                                            },
-                                                                            "copy" : {
-                                                                                    "separator_before"      : false,
-                                                                                    "icon"                          : false,
-                                                                                    "separator_after"       : false,
-                                                                                    "label"                         : "copy",
-                                                                                    "action"                        : function (obj) { this.copy(obj); }
-                                                                            },
-                                                                            "paste" : {
-                                                                                    "separator_before"      : false,
-                                                                                    "icon"                          : false,
-                                                                                    "separator_after"       : false,
-                                                                                    "label"                         : "paste",
-                                                                                    "action"                        : function (obj) { this.paste(obj); }
-                                                                            }
-                                                                    }
-                                                             }
-                                                          }
-                                                  }
+function tree(){
+                 $("#certificate_tree")
+                     .jstree({
+                               core : { },
+                               plugins : [ "themes", "json_data", "ui", "crrm", "cookies", "dnd", "search", "types", "hotkeys", "contextmenu" ],
+                               "json_data" : {
+                                               "ajax" : { 
+                                                          "url"  : "jstree",
+                                                          "data" : function(n) { 
+                                                                                 return n; 
+                                                                               },
+                                                        }
+                                             },
+                               "types" :     {
+                                               "max_depth" : -2,
+                                               "max_children" : -2,
+                                               "valid_children" : ["drive"],
+                                               "types" :     {
+                                    
+                                                               "default" : {
+                                                                             "valid_children" : "none",
+                                                                             "icon" : {
+                                                                                       "image" : "static/images/file.png"
+                                                                                      }
+                                                                           },
+                                                               "folder"  : {
+                                                                             "valid_children" : [ "default", "folder" ],
+                                                                             "icon" : {
+                                                                                      "image" : "static/images/folder.png"
+                                                                                      }
+                                                                           },
+                                                               "drive"   : {
+                                                                             "valid_children" : [ "default", "folder" ],
+                                                                             "icon" : {
+                                                                                        "image" : "static/images/root.png"
+                                                                                      },
+                                                                             "start_drag" : false,
+                                                                             "move_node" : false,
+                                                                             "delete_node" : false,
+                                                                             "remove" : false
+                                                                           }
+                                                           }
+                                             },
 
-                              })
-                          .jstree("set_theme","default")
-                          .bind("create.jstree", function (e, data) {
-                                                                      $.post(
-                                                                              "/create/" + data.rslt.parent.attr("id").replace("node_",""), 
-                                                                              { 
-                                                                                      "operation" : "create_node", 
-                                                                                      "id" : data.rslt.parent.attr("id").replace("node_",""), 
-                                                                                      "position" : data.rslt.position,
-                                                                                      "title" : data.rslt.name,
-                                                                                      "type" : data.rslt.obj.attr("rel")
-                                                                              }, 
-                                                                              function (r) {
-                                                                                             if(r.status) {
-                                                                                                 $(data.rslt.obj).attr("id", "node_" + r.id);
-                                                                                             }
-                                                                                             else 
-                                                                                             {
-                                                                                               $.jstree.rollback(data.rlbk);
-                                                                                             }
-                                                                                           }
-                                                                            );
-                                                                     }
-                               )
-                          .bind("remove.jstree", function (e, data) {
-                                                                      data.rslt.obj.each(function () {
-                                                                                                       $.ajax({
-                                                                                                                async : false,
-                                                                                                                type: 'POST',
-                                                                                                                url: "/remove/" + data.rslt.parent.attr("id").replace("node_",""),
-                                                                                                                data : { 
-                                                                                                                        "operation" : "remove_node", 
-                                                                                                                        "id" : this.id.replace("node_","")
-                                                                                                                }, 
-                                                                                                                success : function (r) {
-                                                                                                                        if(!r.status) {
-                                                                                                                                data.inst.refresh();
-                                                                                                                        }
-                                                                                                                }
-                                                                                                             });
-                                                                                                     });
-                                                                   }
-                               )
-                          .bind("rename.jstree", function (e, data) {
-                                                                       $.post(
-                                                                               "/rename/" + data.rslt.obj.attr("id").replace("node_","") + "/" + data.rslt.new_name,
-                                                                               { 
-                                                                                       "operation" : "rename_node", 
-                                                                                       "id" : data.rslt.obj.attr("id").replace("node_",""),
-                                                                                       "title" : data.rslt.new_name
-                                                                               }, 
-                                                                               function (r) {
-                                                                                       if(!r.status) {
-                                                                                           alert(r.status);
-                                                                                           $.jstree.rollback(data.rlbk);
-                                                                                       }
-                                                                               }
+                                      "ui" : {
+                                               "initially_select" : [ [% SELECTED_LIST %] ]
+                                             },
+                               "contextmenu":{      
+                                               select_node : false, // requires UI plugin
+                                               show_at_node : true,
+                                               //items: contextMenu,
+                                               /**/
+                                               items: function fetchContextMeny(selectedItem) { 
+                                                                                                var menu='';
+                                                                                                $.ajax({
+                                                                                                         url: '/contextmenu/' + selectedItem[0].id ,
+                                                                                                         async : false,
+                                                                                                         dataType: 'json',
+                                                                                                         success: function (){ 
+                                                                                                                               console.log(data);  
+                                                                                                                               menu = data;
+                                                                                                                             }
+                                                                                                       });
+                                                                                                alert( typeof(menu) );
+                                                                                                //alert( menu );
+                                                                                                return menu;
+                                                                                                alert( typeof(contextMenu(selectedItem)) );
+                                                                                                return contextMenu(selectedItem);
+                                                                                              }
+                                               /**/
+                                             }
+                             })
+                     .jstree("set_theme","default")
+                     .bind("create.jstree", function (e, data) {
+                                                                 $.post(
+                                                                         "/create/" + data.rslt.parent.attr("id").replace("node_","") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
+                                                                         { 
+                                                                                 "operation" : "create_node", 
+                                                                                 "id" : data.rslt.parent.attr("id").replace("node_",""), 
+                                                                                 "position" : data.rslt.position,
+                                                                                 "title" : data.rslt.name,
+                                                                                 "type" : data.rslt.obj.attr("rel")
+                                                                         }, 
+                                                                         function (r) {
+                                                                                        if(r.status) {
+                                                                                            $(data.rslt.obj).attr("id", "node_" + r.id);
+                                                                                        }
+                                                                                        else 
+                                                                                        {
+                                                                                          $.jstree.rollback(data.rlbk);
+                                                                                        }
+                                                                                      }
                                                                        );
+                                                                }
+                          )
+                     .bind("remove.jstree", function (e, data) {
+                                                                 data.rslt.obj.each(function () {
+                                                                                                  $.ajax({
+                                                                                                           async : false,
+                                                                                                           type: 'POST',
+                                                                                                           url: "/remove/" + data.rslt.parent.attr("id").replace("node_",""),
+                                                                                                           data : { 
+                                                                                                                   "operation" : "remove_node", 
+                                                                                                                   "id" : this.id.replace("node_","")
+                                                                                                           }, 
+                                                                                                           success : function (r) {
+                                                                                                                   if(!r.status) {
+                                                                                                                           data.inst.refresh();
+                                                                                                                   }
+                                                                                                           }
+                                                                                                        });
+                                                                                                });
+                                                              }
+                          )
+                     .bind("rename.jstree", function (e, data) {
+                                                                  $.post(
+                                                                          "/rename/" + data.rslt.obj.attr("id").replace("node_","") + "/" + data.rslt.new_name,
+                                                                          { 
+                                                                                  "operation" : "rename_node", 
+                                                                                  "id" : data.rslt.obj.attr("id").replace("node_",""),
+                                                                                  "title" : data.rslt.new_name
+                                                                          }, 
+                                                                          function (r) {
+                                                                                  if(!r.status) {
+                                                                                      alert(r.status);
+                                                                                      $.jstree.rollback(data.rlbk);
+                                                                                  }
+                                                                          }
+                                                                  );
                                                                }
-                               )
-                          .bind("move_node.jstree", function (e, data) {
-                                                                         data.rslt.o.each(function (i) {
-                                                                                 $.ajax({
-                                                                                         async : false,
-                                                                                         type: 'POST',
-                                                                                         url: "/move/" + data.rslt.parent.attr("id").replace("node_",""),
-                                                                                         data : { 
-                                                                                                 "operation" : "move_node", 
-                                                                                                 "id" : $(this).attr("id").replace("node_",""), 
-                                                                                                 "ref" : data.rslt.np.attr("id").replace("node_",""), 
-                                                                                                 "position" : data.rslt.cp + i,
-                                                                                                 "title" : data.rslt.name,
-                                                                                                 "copy" : data.rslt.cy ? 1 : 0
-                                                                                         },
-                                                                                         success : function (r) {
-                                                                                                 if(!r.status) {
-                                                                                                         $.jstree.rollback(data.rlbk);
-                                                                                                 }
-                                                                                                 else {
-                                                                                                         $(data.rslt.oc).attr("id", "node_" + r.id);
-                                                                                                         if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
-                                                                                                                 data.inst.refresh(data.inst._get_parent(data.rslt.oc));
-                                                                                                         }
-                                                                                                 }
-                                                                                                 $("#analyze").click();
-                                                                                         }
-                                                                                 });
-                                                                         });
-                                                                 })
-                          .bind("select_node.jstree", function (e, data) {
-                                                                           $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
-                                                                           $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
-                                                                           $("#right-pane").load("/form/" + data.rslt.obj.attr("id").replace("node_",""));
-                                                                           $.ajax({
+                          )
+                     .bind("move_node.jstree", function (e, data) {
+                                                                    data.rslt.o.each(function (i) {
+                                                                            $.ajax({
                                                                                     async : false,
                                                                                     type: 'POST',
-                                                                                    url: "/select/" + data.rslt.obj.attr("id").replace("node_",""),
+                                                                                    url: "/move/" + data.rslt.parent.attr("id").replace("node_",""),
                                                                                     data : { 
-                                                                                             "operation" : "select_node", 
-                                                                                             "id" : data.rslt.obj.attr("id").replace("node_",""),
-                                                                                             "title" : data.rslt.new_name
-                                                                                           },
+                                                                                            "operation" : "move_node", 
+                                                                                            "id" : $(this).attr("id").replace("node_",""), 
+                                                                                            "ref" : data.rslt.np.attr("id").replace("node_",""), 
+                                                                                            "position" : data.rslt.cp + i,
+                                                                                            "title" : data.rslt.name,
+                                                                                            "copy" : data.rslt.cy ? 1 : 0
+                                                                                    },
                                                                                     success : function (r) {
-                                                                                                             console.log(data.rslt.obj);  
-                                                                                                           }
-                                                                                  })
-                                                                         });
-                    };
+                                                                                            if(!r.status) {
+                                                                                                    $.jstree.rollback(data.rlbk);
+                                                                                                 }
+                                                                                            else {
+                                                                                                    $(data.rslt.oc).attr("id", "node_" + r.id);
+                                                                                                    if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+                                                                                                            data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+                                                                                                    }
+                                                                                            }
+                                                                                            $("#analyze").click();
+                                                                                    }
+                                                                            });
+                                                                    });
+                                                            })
+                     .bind("select_node.jstree", function (e, data) {
+                                                                      /* Toggle open/close on select
+                                                                      $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
+                                                                      $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
+                                                                      */
+                                                                      $("#right-pane").load("/form/" + data.rslt.obj.attr("id").replace("node_",""));
+                                                                      $.ajax({
+                                                                               async : false,
+                                                                               type: 'POST',
+                                                                               url: "/select/" + data.rslt.obj.attr("id").replace("node_",""),
+                                                                               data : { 
+                                                                                        "operation" : "select_node", 
+                                                                                        "id" : data.rslt.obj.attr("id").replace("node_",""),
+                                                                                        "title" : data.rslt.new_name
+                                                                                      },
+                                                                               success : function (r) {
+                                                                                                        console.log(data.rslt.obj);  
+                                                                                                      }
+                                                                             })
+                                                                    });
+};
 </script>
+
 <script type="text/javascript">
 $(function () { 
 	$("#mmenu input").click(function () {
