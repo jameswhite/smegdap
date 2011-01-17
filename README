@@ -40,3 +40,37 @@ dpkg -i libcatalyst-model-ldap-perl_0.17-1_all.deb
  |     + dc=example,dc=com        -> edit attributes, ACLs
  |     + dc=example,dc=net        -> edit attributes, ACLs
  + Logout
+
+## All:
+"login" view
+
+"create account"    view that creates => cn=<userid>,ou=accounts,${basedn} 
+                    && send verify email link; verified=0; timecreated=now;
+
+## Free LDAP Hosting:
+"verify email link" view that creates => dc=<userid>,${basedn} and ou=Administrators,dc=<userid>${basedn} 
+                    default ACL gives cn=<userid>,ou=accounts,${basedn} write on dc=<userid>,${basedn} scope sub
+                    # now the user (if skilled can jsut fire up any ldap client and start adding sub-dns
+
+# but, for the novice:
+"create domain"     view that creates => cn=<domain>,ou=Administrators,dc=<userid>${basedn} 
+                                        # ACLs set up so any member of cn=<domain>,ou=Administrators,dc=<userid>${basedn}
+                                        # may write dc=<domain>,dc=<userid>,${basedn}
+                                        dc=<domain>,dc=<userid>,${basedn} 
+                                          + ou=Aliases
+                                          + ou=DNS
+                                          + ou=Group
+                                          + ou=Hosts
+                                          + ou=Networks
+                                          + ou=People
+                                          + ou=Sets
+                                          + ou=Special
+                                          + ou=sudoers
+
+## Premium LDAP Hosting $(14.95/mo)
+"verify email link":  "verifies payment"
+    prompts for basedn, sees if it's available, 
+
+view that creates => dc=<userid>,${basedn} and ou=Administrators,dc=<userid>${basedn} 
+                    default ACL gives cn=<userid>,ou=accounts,${basedn} write on dc=<userid>,${basedn} scope sub
+                    # now the user (if skilled can jsut fire up any ldap client and start adding sub-dns

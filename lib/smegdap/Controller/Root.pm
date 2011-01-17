@@ -51,6 +51,10 @@ sub default :Path {
         if( $c->request->arguments->[0] eq "jstree" ){
             $c->forward('jstreemenu');
             $c->detach();
+        }elsif( $c->request->arguments->[0] eq "select" ){
+            $c->res->body($self->json_wrap({'status' => 1}));
+        }elsif( $c->request->arguments->[0] eq "rename" ){
+            $c->res->body($self->json_wrap({'status' => 1}));
         }else{
             $c->stash->{'template'}="application.tt";
         }
@@ -67,28 +71,53 @@ sub jstreemenu : Local {
     #if($c->check_user_roles( "certificate_administrators" )){
     push( @{ $menu_tree }, [
                              {
-                               'attributes' => { 'id' =>  unpack("H*","connection_list") },
-                               'data' => { 'title' => 'Connections', 'icon' => 'closed'},
+                               'attr' => { 'id' => 'conn', "rel" => "drive"},
+                               'data' => { 'title' => 'Connections', 'state' => 'closed'},
                                'children' => [
                                                {
-                                                 'attributes' => { 'id' =>  unpack("H*","new_cert1") },
-                                                 'data' => { 'title' => 'faraday.eftdomain.net', 'icon' => 'server'},
+                                                 'attr' => { 'id' => 'host:faraday.eftdomain.net', "rel" => "folder" },
+                                                 'data' => { 'title' => 'faraday.eftdomain.net', 'state' => 'closed'},
+                                                 'children' => [
+                                                                 {
+                                                                   'attr' => { 'id' => 'host:faraday.eftdomain.net:dc--eftdomain,dc=net', "rel" => "folder" },
+                                                                   'data' => { 'title' => 'dc=eftdomain,dc=net', 'state' => 'closed'},
+                                                                   'children' => [
+                                                                                   {
+                                                                                     'attr' => { 
+                                                                                                 'id' => 'host:faraday.eftdomain.net:dc--eftdomain,dc--net:ou--Group', 
+                                                                                                 'rel' => 'folder' },
+                                                                                     'data' => { 'title' => 'ou=Group', 'state' => 'closed'},
+                                                                                   },
+                                                                                   {
+                                                                                     'attr' => { 
+                                                                                                 'id' => 'host:faraday.eftdomain.net:dc--eftdomain,dc--net:ou--Hosts', 
+                                                                                                 'rel' => 'folder' },
+                                                                                     'data' => { 'title' => 'ou=Hosts', 'state' => 'closed'},
+                                                                                   },
+                                                                                   {
+                                                                                     'attr' => { 
+                                                                                                 'id' => 'host:faraday.eftdomain.net:dc--eftdomain,dc--net:ou--People', 
+                                                                                                 'rel' => 'folder' },
+                                                                                     'data' => { 'title' => 'ou=People', 'state' => 'closed'},
+                                                                                   },
+                                                                                 ]
+                                                                 },
+                                                               ]
                                                },
                                                {
-                                                 'attributes' => { 'id' =>  unpack("H*","new_cert2") },
-                                                 'data' => { 'title' => 'maxwell.eftdomain.net', 'icon' => 'server'},
+                                                 'attr' => { 'id' => 'host:maxwell.eftdomain.net', "rel" => "folder" },
+                                                 'data' => { 'title' => 'maxwell.eftdomain.net', 'state' => 'closed'},
                                                },
                                              ]
                              },
                              {
-                               'attributes' => { 'id' =>  unpack("H*","logout") },
-                               'data' => { 'title' => 'Logout', 'icon' => 'leave'},
+                               'attr' => { 'id' => 'logout', "rel" => 'drive' },
+                               'data' => { 'title' => 'Logout', 'state' => ''},
                              },
                            ]
         );
     $c->res->body($self->json_wrap($menu_tree, {'pretty' => 1}));
 }
-
 
 =head2 end
 
