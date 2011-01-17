@@ -34,19 +34,19 @@ function tree()     {
                                                                     "default" : {
                                                                                   "valid_children" : "none",
                                                                                   "icon" : {
-                                                                                            "image" : "static/image/file.png"
+                                                                                            "image" : "static/images/file.png"
                                                                                            }
                                                                                 },
                                                                     "folder"  : {
                                                                                   "valid_children" : [ "default", "folder" ],
                                                                                   "icon" : {
-                                                                                           "image" : "static/image/folder.png"
+                                                                                           "image" : "static/images/folder.png"
                                                                                            }
                                                                                 },
                                                                     "drive"   : {
                                                                                   "valid_children" : [ "default", "folder" ],
                                                                                   "icon" : {
-                                                                                             "image" : "static/image/root.png"
+                                                                                             "image" : "static/images/root.png"
                                                                                            },
                                                                                   "start_drag" : false,
                                                                                   "move_node" : false,
