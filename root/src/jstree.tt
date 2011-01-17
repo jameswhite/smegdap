@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="static/js/themes/default/style.css">
 <script type="text/javascript" src="static/js/jquery.jstree.js"></script>
-<script type="text/javascript" src="http://static.jstree.com/v.1.0rc2/jquery.cookie.js"></script>
-<script type="text/javascript" src="http://static.jstree.com/v.1.0rc2/jquery.hotkeys.js"></script>
+<script type="text/javascript" src="static/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="static/js/jquery.hotkeys.js"></script>
 <style type="text/css">
 #certificate_tree, #certificate_tree input, .jstree-dnd-helper, #vakata-contextmenu { font-size:10px; font-family:Verdana; }
 #container { position:relative; }
@@ -34,19 +34,19 @@ function tree()     {
                                                                     "default" : {
                                                                                   "valid_children" : "none",
                                                                                   "icon" : {
-                                                                                            "image" : "http://www.jstree.com/static/v.1.0rc2/_demo/file.png"
+                                                                                            "image" : "static/image/file.png"
                                                                                            }
                                                                                 },
                                                                     "folder"  : {
                                                                                   "valid_children" : [ "default", "folder" ],
                                                                                   "icon" : {
-                                                                                           "image" : "http://www.jstree.com//static/v.1.0rc2/_demo/folder.png"
+                                                                                           "image" : "static/image/folder.png"
                                                                                            }
                                                                                 },
                                                                     "drive"   : {
                                                                                   "valid_children" : [ "default", "folder" ],
                                                                                   "icon" : {
-                                                                                             "image" : "http://www.jstree.com//static/v.1.0rc2/_demo/root.png"
+                                                                                             "image" : "static/image/root.png"
                                                                                            },
                                                                                   "start_drag" : false,
                                                                                   "move_node" : false,
@@ -118,7 +118,7 @@ function tree()     {
                           .jstree("set_theme","default")
                           .bind("create.jstree", function (e, data) {
                                                                       $.post(
-                                                                              "/static/v.1.0rc2/_demo/server.php", 
+                                                                              "/create/" + data.rslt.parent.attr("id").replace("node_",""), 
                                                                               { 
                                                                                       "operation" : "create_node", 
                                                                                       "id" : data.rslt.parent.attr("id").replace("node_",""), 
@@ -143,7 +143,7 @@ function tree()     {
                                                                                                        $.ajax({
                                                                                                                 async : false,
                                                                                                                 type: 'POST',
-                                                                                                                url: "/static/v.1.0rc2/_demo/server.php",
+                                                                                                                url: "/remove/" + data.rslt.parent.attr("id").replace("node_",""),
                                                                                                                 data : { 
                                                                                                                         "operation" : "remove_node", 
                                                                                                                         "id" : this.id.replace("node_","")
@@ -179,7 +179,7 @@ function tree()     {
                                                                                  $.ajax({
                                                                                          async : false,
                                                                                          type: 'POST',
-                                                                                         url: "/static/v.1.0rc2/_demo/server.php",
+                                                                                         url: "/move/" + data.rslt.parent.attr("id").replace("node_",""),
                                                                                          data : { 
                                                                                                  "operation" : "move_node", 
                                                                                                  "id" : $(this).attr("id").replace("node_",""), 
@@ -204,6 +204,9 @@ function tree()     {
                                                                          });
                                                                  })
                           .bind("select_node.jstree", function (e, data) {
+                                                                           $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
+                                                                           $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
+                                                                           $("#right-pane").load("/form/" + data.rslt.obj.attr("id").replace("node_",""));
                                                                            $.ajax({
                                                                                     async : false,
                                                                                     type: 'POST',
