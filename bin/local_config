@@ -15,7 +15,6 @@ if(-f "/etc/ldap/ldap.conf"){
         while(my $line=<$fh>){
             $line=~s/#.*//g;
             if($line=~m/^\s*uri\s+(.*)/){ $var->{'LDAP_URI'}=$1; }
-            # if($var->{'LDAP_URI'}=~m/,/){$var->{'LDAP_URI'}=[ split(", +",$var->{'LDAP_URI'}) ];}
             if($line=~m/^\s*binddn\s+(.*)/){$var->{'LDAP_BINDDN'}=$1;}
             if($line=~m/^\s*bindpw\s+(.*)/){$var->{'LDAP_BINDPW'}=$1;}
             if($line=~m/^\s*base\s+(.*)/){$var->{'LDAP_BASEDN'}=$1;}
@@ -95,8 +94,15 @@ if(-f "$config"){
     my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1, ABSOLUTE => 1 };
     my $template = Template->new($ttconfig);
     $template->process($config, $var, \$config_buffer) || die $template->error();
+    # now we have to postprocess comma separated uris into a list or the auth module barfs
     my $struct = YAML::Load($config_buffer);
-    print YAML::Dump($struct);
+    foreach my $realm (keys( @{ $struct->{'realms'} } )){
+        if($struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'}=~m/,/){ 
+            $struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'} = 
+              [ split(", +",$struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'}) ]; 
+        }
+    }
+    YAML::DumpFile($newconfig,$struct);
 }
 # $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
 
