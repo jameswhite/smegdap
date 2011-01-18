@@ -21,6 +21,15 @@ function contextMenu(clickeditem){
                           "label"            : "create",
                           "action"           : function (obj) { this.create(obj); }
                   },
+           }
+    }else{
+    return {
+             "create" : {
+                          "separator_before" : false,
+                          "separator_after"  : true,
+                          "label"            : "create",
+                          "action"           : function (obj) { this.create(obj); }
+                  },
                   "rename" : {
                           "separator_before" : false,
                           "separator_after"  : false,
@@ -117,8 +126,8 @@ function tree(){
                                "contextmenu":{      
                                                select_node : false, // requires UI plugin
                                                show_at_node : true,
-                                               //items: contextMenu,
-                                               /**/
+                                               items: contextMenu,
+                                               /*
                                                items: function fetchContextMeny(selectedItem) { 
                                                                                                 var menu;
                                                                                                 $.ajax({
@@ -133,7 +142,7 @@ function tree(){
                                                                                                        });
                                                                                                 return menu;
                                                                                               }
-                                               /**/
+                                               */
                                              }
                              })
                      .jstree("set_theme","default")
