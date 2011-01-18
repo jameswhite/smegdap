@@ -4,7 +4,9 @@
                        libcatalyst-modules-extra-perl                          \
                        libnet-ldap-perl libnet-ldap-server-perl                \
                        libconvert-asn1-perl libmoose-perl                      \
-                       libcatalyst-plugin-requiressl-perl
+                       libcatalyst-plugin-requiressl-perl                      \
+                       libcatalyst-authentication-store-ldap-perl              \
+                       libio-socket-ssl-perl
 
 ################################################################################
 wget -O Catalyst-Model-LDAP-0.17.tar.gz \
