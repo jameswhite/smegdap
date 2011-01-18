@@ -11,71 +11,8 @@
 #text { margin-top:1px; }
 #alog { font-size:9px !important; margin:5px; border:1px solid silver; }
 </style>
+[% INCLUDE contextMenu.tt %]
 <script type="text/javascript">
-function contextMenu(clickeditem){
-    if(clickeditem[0].id == "conn"){
-    return {
-             "create" : {
-                          "separator_before" : false,
-                          "separator_after"  : true,
-                          "label"            : "create",
-                          "action"           : function (obj) { this.create(obj); }
-                  },
-           }
-    }else{
-    return {
-             "create" : {
-                          "separator_before" : false,
-                          "separator_after"  : true,
-                          "label"            : "create",
-                          "action"           : function (obj) { this.create(obj); }
-                  },
-                  "rename" : {
-                          "separator_before" : false,
-                          "separator_after"  : false,
-                          "label"            : "rename",
-                          "action"           : function (obj) { this.rename(obj); }
-                  },
-                  "remove" : {
-                          "separator_before" : false,
-                          "icon"             : false,
-                          "separator_after"  : false,
-                          "label"            : "delete",
-                          "action"           : function (obj) { this.remove(obj); }
-                  },
-                  "ccp" : {
-                          "separator_before" : true,
-                          "icon"             : false,
-                          "separator_after"  : false,
-                          "label"            : "edit",
-                          "action"           : false,
-                          "submenu"          : {
-                                                 "cut"   : {
-                                                             "separator_before" : false,
-                                                             "separator_after"  : false,
-                                                             "label"            : "cut",
-                                                             "action"           : function (obj) { this.cut(obj); }
-                                                           },
-                                                 "copy"  : {
-                                                             "separator_before" : false,
-                                                             "icon"             : false,
-                                                             "separator_after"  : false,
-                                                             "label"            : "copy",
-                                                             "action"           : function (obj) { this.copy(obj); }
-                                                           },
-                                                 "paste" : {
-                                                             "separator_before" : false,
-                                                             "icon"             : false,
-                                                             "separator_after"  : false,
-                                                             "label"            : "paste",
-                                                             "action"           : function (obj) { this.paste(obj); }
-                                                           }
-                          }
-                   }
-    }
-    }
-};
-
 function tree(){
                  $("#certificate_tree")
                      .jstree({
@@ -127,7 +64,7 @@ function tree(){
                                                select_node : false, // requires UI plugin
                                                show_at_node : true,
                                                items: contextMenu,
-                                               /*
+                                               /* returning "function (foo) { blah }" breaks the json parser in the callback
                                                items: function fetchContextMeny(selectedItem) { 
                                                                                                 var menu;
                                                                                                 $.ajax({
