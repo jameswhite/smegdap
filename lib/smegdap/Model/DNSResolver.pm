@@ -3,7 +3,7 @@ package smegdap::Model::DNSResolver;
 use strict;
 use warnings;
 use parent 'Catalyst::Model';
-use Net::DNS
+use Net::DNS;
 
 =head1 NAME
 
