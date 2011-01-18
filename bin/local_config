@@ -2,6 +2,7 @@
 use Cwd;
 use FileHandle;
 use YAML;
+use Template;
 use Data::Dumper;
 my $var;
 ################################################################################
@@ -87,30 +88,17 @@ $config="$dir/authconfig.template";
 # Now we write out our template
 ################################################################################
 my $template;
+
 if(-f "$config"){
     $template=YAML::LoadFile($config);
-}
-foreach my $key (keys(%{ $template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'} })){
-    if($template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{$key}=~m/\[\% (.*) \%\]/){
-        my $replacement=$1;
-        $template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{$key}=~s/\[\%.*\%\]/$var->{$replacement}/;
-    }
-}
-$template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
-
-foreach my $key (keys(%{ $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'} })){
-    if($template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{$key}=~m/\[\% (.*) \%\]/){
-        my $replacement=$1;
-        $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{$key}=~s/\[\%.*\%\]/$var->{$replacement}/;
-    }
-}
-$template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
-$template->{'global'}->{'domain'}=$dnsdomain;
-$template->{'global'}->{'cert_basedn'}=$ca_basedn;
-$template->{'global'}->{'crl_base'}="https://pki.$dnsdomain";
-
-if($config=~m/(.*)/){
-    my $newconfig=$1;
+    my $newconfig=$config:
     $newconfig=~s/\.template/\.yaml/;
-    YAML::DumpFile($newconfig,$template);
+    my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1 };
+    my $template = Template->new($ttconfig);
+    $template->process($config, $vars, $newconfig);
 }
+# $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
+
+# $template->{'global'}->{'domain'}=$dnsdomain;
+# $template->{'global'}->{'cert_basedn'}=$ca_basedn;
+# $template->{'global'}->{'crl_base'}="https://pki.$dnsdomain";
