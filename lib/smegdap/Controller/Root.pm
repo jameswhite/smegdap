@@ -80,9 +80,9 @@ sub jstreemenu : Local {
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
                                'data' => { 'title' => 'Connections', 'state' => 'closed'},
-                               'children' => [
-                                               {
-                                                 'attr' => { 'id' => 'host:faraday.eftdomain.net', "rel" => "folder" },
+#                               'children' => [
+#                                               {
+#                                                 'attr' => { 'id' => 'host:faraday.eftdomain.net', "rel" => "folder" },
 #                                                 'data' => { 'title' => 'ldaps://faraday.eftdomain.net:636', 'state' => 'closed'},
 #                                                 'children' => [
 #                                                                 {
