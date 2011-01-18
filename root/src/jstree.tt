@@ -33,9 +33,9 @@ function tree(){
                                                "types" :     {
                                     
                                                                "default" : {
-                                                                             "valid_children" : [ "folder" , "default" ],
+                                                                             "valid_children" : "none"
                                                                              "icon" : {
-                                                                                       "image" : "static/images/folder.png"
+                                                                                       "image" : "static/images/file.png"
                                                                                       }
                                                                            },
                                                                "logout"  : {

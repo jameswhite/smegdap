@@ -12,8 +12,8 @@ function contextMenu(clickeditem){
                                                                                 obj,
                                                                                 "last",
                                                                                 { 
-                                                                                  "attr": { "id"   : "node_4", "rel"  : "folder" },
-                                                                                  "data": { "title": "node_4", "state": ""  },
+                                                                                  "attr": { "id"   : "", "rel"  : "folder" },
+                                                                                  "data": { "title": "", "state": ""  },
                                                                                 },
                                                                                 null,
                                                                                 0
