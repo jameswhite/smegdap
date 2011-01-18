@@ -90,7 +90,6 @@ function tree(){
                              })
                      .jstree("set_theme","default")
                      .bind("create.jstree", function (e, data) {
-alert(typeof(e));
                                                                  $.post(
                                                                          "/create/" + data.rslt.parent.attr("id").replace("node_","") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
                                                                          { 
