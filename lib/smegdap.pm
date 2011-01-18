@@ -4,6 +4,8 @@ use strict;
 use warnings;
 
 use Catalyst::Runtime '5.70';
+use YAML qw(LoadFile);
+
 
 # Set flags and add plugins for the application
 #
@@ -14,7 +16,6 @@ use Catalyst::Runtime '5.70';
 #                 directory
 
 use parent qw/Catalyst/;
-
 use Catalyst qw/-Debug ConfigLoader Authentication Authorization::Roles Static::Simple Session Session::Store::FastMmap Session::State::Cookie/;
 our $VERSION = '0.01';
 
@@ -28,6 +29,10 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config( name => 'smegdap' );
+__PACKAGE__->config( YAML::LoadFile( file(__PACKAGE__->config->{home}, 'authconfig.yaml') ) );
+# Start the application
+__PACKAGE__->setup( qw/RequireSSL/ );
+__PACKAGE__->config->{require_ssl} = { remain_in_ssl => 1, no_cache => 1, };
 
 # Start the application
 __PACKAGE__->setup();
