@@ -1,7 +1,7 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    console.log(clickeditem[0]);
-    if(clickeditem[0].id == "connections"){
+    console.log(clickeditem[0].rel);
+    if(clickeditem[0].rel == "drive"){
         return {
                  "create" : {
                               "separator_before" : false,
@@ -10,7 +10,7 @@ function contextMenu(clickeditem){
                               "action"           : function (obj) { this.create(obj); }
                       },
                }
-    }else if(clickeditem[0].id == "logout"){
+    }else if(clickeditem[0].id == "folder"){
         return {
                  "create" : {
                               "separator_before" : false,
