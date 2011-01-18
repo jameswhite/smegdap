@@ -103,24 +103,25 @@ sub application :Private {
 sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
+    my @connections
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
                                'data' => { 'title' => 'Connections', 'state' => 'closed'},
-                               'children' => [ {
-                                                 'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
-                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
-                                                 'children' => [ {
-                                                                   'attr' => { 'id' => 'host:odin.websages.com', "rel" => "folder" },
-                                                                   'data' => { 'title' => 'ldaps://odin.websages.com:636', 'state' => 'closed'},
-                                                                 },
-                                                                 {
-                                                                   'attr' => { 'id' => 'host:freyr.websages.com', "rel" => "folder" },
-                                                                   'data' => { 'title' => 'ldaps://freyr.websages.com:636', 'state' => 'closed'},
-                                                                 },
-                                                               ],
-                                               }
-                                              ],
+#                               'children' => [ {
+#                                                 'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
+#                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+#                                                 'children' => [ {
+#                                                                   'attr' => { 'id' => 'host:odin.websages.com', "rel" => "folder" },
+#                                                                   'data' => { 'title' => 'ldaps://odin.websages.com:636', 'state' => 'closed'},
+#                                                                 },
+#                                                                 {
+#                                                                   'attr' => { 'id' => 'host:freyr.websages.com', "rel" => "folder" },
+#                                                                   'data' => { 'title' => 'ldaps://freyr.websages.com:636', 'state' => 'closed'},
+#                                                                 },
+#                                                               ],
+#                                               }
+#                                              ],
 #                               'children' => [
 #                                               {
 #                                                 'attr' => { 'id' => 'host:faraday.eftdomain.net', "rel" => "folder" },
