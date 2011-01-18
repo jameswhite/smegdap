@@ -74,6 +74,7 @@ sub default :Private {
         $c->stash->{template}="default.tt";
         $c->detach();
     }
+    $c->forward('application');
 }
 
 sub application :Private {
