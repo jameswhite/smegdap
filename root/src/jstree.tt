@@ -181,7 +181,7 @@ function tree(){
                                                                       $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
-                                                                      $("#right-pane").load("/form/" + data.rslt.obj.attr("id").replace("node_",""));
+                                                                      $("#right-pane").load("form/" + data.rslt.obj.attr("id").replace("node_",""));
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
