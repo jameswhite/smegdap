@@ -91,11 +91,11 @@ my $template;
 
 if(-f "$config"){
     $template=YAML::LoadFile($config);
-    my $newconfig=$config:
+    my $newconfig=$config;
     $newconfig=~s/\.template/\.yaml/;
     my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1 };
     my $template = Template->new($ttconfig);
-    $template->process($config, $vars, $newconfig);
+    $template->process($config, $var, $newconfig);
 }
 # $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
 
