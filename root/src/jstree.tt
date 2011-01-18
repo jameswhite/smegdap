@@ -33,7 +33,7 @@ function tree(){
                                                "types" :     {
                                     
                                                                "default" : {
-                                                                             "valid_children" : "folder" , "default",
+                                                                             "valid_children" : [ "folder" , "default" ],
                                                                              "icon" : {
                                                                                        "image" : "static/images/folder.png"
                                                                                       }
