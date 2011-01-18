@@ -118,7 +118,7 @@ sub jstreemenu : Local {
 #                                             ]
                              },
                              {
-                               'attr' => { 'id' => 'logout', "rel" => 'drive' },
+                               'attr' => { 'id' => 'logout', "rel" => 'logout' },
                                'data' => { 'title' => 'Logout', 'state' => ''},
                              },
                            ]

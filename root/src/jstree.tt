@@ -38,6 +38,12 @@ function tree(){
                                                                                        "image" : "static/images/file.png"
                                                                                       }
                                                                            },
+                                                               "logout"  : {
+                                                                             "valid_children" : "none",
+                                                                             "icon" : {
+                                                                                       "image" : "static/images/logout.png"
+                                                                                      }
+                                                                           },
                                                                "folder"  : {
                                                                              "valid_children" : [ "default", "folder" ],
                                                                              "icon" : {
