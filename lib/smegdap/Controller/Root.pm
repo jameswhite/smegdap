@@ -37,12 +37,12 @@ sub json_wrap{
      }
 }
 
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-    
-    #$c->stash->{'template'}="static.tt";
-    $c->forward('default');
-}
+#sub index :Path :Args(0) {
+#    my ( $self, $c ) = @_;
+#    
+#    #$c->stash->{'template'}="static.tt";
+#    $c->forward('default');
+#}
 
 sub default :Private {
     my ( $self, $c ) = @_;
