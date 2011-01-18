@@ -78,7 +78,7 @@ sub jstreemenu : Local {
     my $menu_tree;
     push( @{ $menu_tree }, [
                              {
-                               'attr' => { 'id' => 'conn', "rel" => "drive"},
+                               'attr' => { 'id' => 'connections', "rel" => "drive"},
                                'data' => { 'title' => 'Connections', 'state' => 'closed'},
 #                               'children' => [
 #                                               {
