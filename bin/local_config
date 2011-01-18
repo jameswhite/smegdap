@@ -93,7 +93,7 @@ if(-f "$config"){
     $template=YAML::LoadFile($config);
     my $newconfig=$config;
     $newconfig=~s/\.template/\.yaml/;
-    my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1 };
+    my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1, ABSOLUTE => 1 };
     my $template = Template->new($ttconfig);
     $template->process($config, $var, $newconfig) || die $template->error();
 }
