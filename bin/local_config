@@ -79,7 +79,7 @@ my $bin=$0;
 my $dir=$1 if($bin=~m/(.*)\/[^\/]+/);
 chdir $dir; $dir=getcwd;
 $dir=~s/\/bin//;
-$config="$dir/pkild.yaml.template";
+$config="$dir/authconfig.yaml.template";
 
 ################################################################################
 # Now we write out our template
