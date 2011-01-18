@@ -95,6 +95,7 @@ sub default :Path {
     ############################################################################
     if(!defined $c->session->{'user'}){
         $c->stash->{template}="login.tt";
+        $c->detach();
     }else{
         if( $c->request->arguments->[0]){
             if( $c->request->arguments->[0] eq "contextmenu" ){
