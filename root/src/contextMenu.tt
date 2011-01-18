@@ -10,7 +10,7 @@ function contextMenu(clickeditem){
                               "action"           : function (obj) { this.create(obj); }
                       },
                }
-    }else if(clickeditem[0].attr("rel") == "folder"){
+    }else if(clickeditem.attr("rel") == "logout"){
         return {
                  "create" : {
                               "separator_before" : false,
