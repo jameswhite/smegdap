@@ -97,8 +97,7 @@ function tree(){
                                                                                  "id" : data.rslt.parent.attr("id").replace("node_",""), 
                                                                                  "position" : data.rslt.position,
                                                                                  "title" : data.rslt.name,
-                                                                                 //"type" : data.rslt.obj.attr("rel")
-                                                                                 "type" : "folder"
+                                                                                 "type" : data.rslt.obj.attr("rel")
                                                                          }, 
                                                                          function (r) {
                                                                                         if(r.status) {
@@ -198,24 +197,4 @@ function tree(){
                                                                              })
                                                                     });
 };
-</script>
-
-<script type="text/javascript">
-$(function () { 
-	$("#mmenu input").click(function () {
-		switch(this.id) {
-			case "add_default":
-			case "add_folder":
-				$("#certificate_tree").jstree("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } });
-				break;
-			case "search":
-				$("#certificate_tree").jstree("search", document.getElementById("text").value);
-				break;
-			case "text": break;
-			default:
-				$("#certificate_tree").jstree(this.id);
-				break;
-		}
-	});
-});
 </script>
