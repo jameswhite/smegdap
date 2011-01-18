@@ -97,7 +97,8 @@ function tree(){
                                                                                  "id" : data.rslt.parent.attr("id").replace("node_",""), 
                                                                                  "position" : data.rslt.position,
                                                                                  "title" : data.rslt.name,
-                                                                                 "type" : data.rslt.obj.attr("rel")
+                                                                                 //"type" : data.rslt.obj.attr("rel")
+                                                                                 "type" : "folder"
                                                                          }, 
                                                                          function (r) {
                                                                                         if(r.status) {
