@@ -96,7 +96,7 @@ if(-f "$config"){
     $template->process($config, $var, \$config_buffer) || die $template->error();
     # now we have to postprocess comma separated uris into a list or the auth module barfs
     my $struct = YAML::Load($config_buffer);
-    foreach my $realm (keys( @{ $struct->{'realms'} } )){
+    foreach my $realm (keys( %{ $struct->{'realms'} } )){
         if($struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'}=~m/,/){ 
             $struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'} = 
               [ split(", +",$struct->{'realms'}->{$realm}->{'store'}->{'ldap_server'}) ]; 
