@@ -1,0 +1,114 @@
+#!/usr/bin/perl -wT
+use Cwd;
+use FileHandle;
+use YAML;
+use Data::Dumper;
+my $var;
+################################################################################
+# Scrape our ldap.conf to get our read-only credentials
+################################################################################
+if(-f "/etc/ldap/ldap.conf"){
+    $fh = FileHandle->new;
+    if($fh->open("< /etc/ldap/ldap.conf")) {
+        while(my $line=<$fh>){
+            $line=~s/#.*//g;
+            if($line=~m/^\s*uri\s+(.*)/){ $var->{'LDAP_URI'}=$1; }
+            if($var->{'LDAP_URI'}=~m/,/){$var->{'LDAP_URI'}=[ split(", +",$var->{'LDAP_URI'}) ];}
+            if($line=~m/^\s*binddn\s+(.*)/){$var->{'LDAP_BINDDN'}=$1;}
+            if($line=~m/^\s*bindpw\s+(.*)/){$var->{'LDAP_BINDPW'}=$1;}
+            if($line=~m/^\s*base\s+(.*)/){$var->{'LDAP_BASEDN'}=$1;}
+        }
+        $fh->close;
+    }
+}
+
+################################################################################
+# get our domain name
+################################################################################
+my $dnsdomain=$var->{'LDAP_BASEDN'};
+$dnsdomain=~s/,dc=/\./g;
+$dnsdomain=~s/^dc=//g;
+################################################################################
+# verify we have something for each of them or complain
+################################################################################
+my $ready=1;
+my @variables=('LDAP_URI','LDAP_BASEDN','LDAP_BINDDN','LDAP_BINDPW');
+foreach my $vitem (@variables){
+    if(!defined($var->{$vitem})){
+        if(!defined($ENV{$var})){
+            $ready=0;
+            print "Please define \$$vitem in the environment.\n";
+        }else{
+            $var->{$vitem}=$ENV{$vitem};
+        }
+    }
+}
+exit unless $ready;
+################################################################################
+# figure out where we are so we can find our authconfig template
+################################################################################
+use Net::DNS;
+my $ca_basedn='';
+my $res   = Net::DNS::Resolver->new;
+my $query = $res->query("ca-basedn.$dnsdomain", "TXT");
+if ($query) {
+    foreach my $rr (grep { $_->type eq 'TXT' } $query->answer) {
+        foreach my $r ($rr->char_str_list){
+            my @components=split(",",$r);
+            for(my $idx=0; $idx<=$#components; $idx++){
+                my ($key,$val) = split(/=/,$components[$idx]);
+                $key=~s/^\s//; $key=~s/\s$//;
+                $val=~s/^\s//; $val=~s/\s$//;
+                $key=~tr/A-Z/a-z/;
+                $components[$idx]="$key=$val";
+            }
+            if($ca_basedn eq ''){
+                $ca_basedn = join(', ',@components);
+            }else{
+                $ca_basedn .= ", ".join(', ',@components);
+            }
+        }
+    }
+}else{
+    warn "query failed: ", $res->errorstring, "\n";
+}
+################################################################################
+# figure out where we are so we can find our authconfig template
+################################################################################
+my $bin=$0;
+my $dir=$1 if($bin=~m/(.*)\/[^\/]+/);
+chdir $dir; $dir=getcwd;
+$dir=~s/\/bin//;
+$config="$dir/pkild.yaml.template";
+
+################################################################################
+# Now we write out our template
+################################################################################
+my $template;
+if(-f "$config"){
+    $template=YAML::LoadFile($config);
+}
+foreach my $key (keys(%{ $template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'} })){
+    if($template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{$key}=~m/\[\% (.*) \%\]/){
+        my $replacement=$1;
+        $template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{$key}=~s/\[\%.*\%\]/$var->{$replacement}/;
+    }
+}
+$template->{'authentication'}->{'realms'}->{'ldap-people'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
+
+foreach my $key (keys(%{ $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'} })){
+    if($template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{$key}=~m/\[\% (.*) \%\]/){
+        my $replacement=$1;
+        $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{$key}=~s/\[\%.*\%\]/$var->{$replacement}/;
+    }
+}
+$template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
+$template->{'global'}->{'domain'}=$dnsdomain;
+$template->{'global'}->{'cert_basedn'}=$ca_basedn;
+$template->{'global'}->{'crl_base'}="https://pki.$dnsdomain";
+
+if($config=~m/(.*)/){
+    my $newconfig=$1;
+    $newconfig=~s/\.template//;
+    YAML::DumpFile($newconfig,$template);
+}

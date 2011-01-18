@@ -7,7 +7,6 @@ use Catalyst::Runtime '5.70';
 use YAML qw(LoadFile);
 use Path::Class 'file';
 
-
 # Set flags and add plugins for the application
 #
 #         -Debug: activates the debug mode for very useful log messages
