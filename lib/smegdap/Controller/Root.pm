@@ -138,7 +138,7 @@ sub contextmenu : Local {
                              "separator_before" : false,
                              "separator_after"  : true,
                              "label"            : "create",
-                             "action"           : function (obj) { this.create(obj); }
+                             "action"           : "function (obj) { this.create(obj); }"
                            },
               }';
 #                "rename" : {

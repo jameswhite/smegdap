@@ -120,21 +120,18 @@ function tree(){
                                                //items: contextMenu,
                                                /**/
                                                items: function fetchContextMeny(selectedItem) { 
-                                                                                                var menu='';
+                                                                                                var menu;
                                                                                                 $.ajax({
                                                                                                          url: '/contextmenu/' + selectedItem[0].id ,
                                                                                                          async : false,
                                                                                                          dataType: 'json',
-                                                                                                         success: function (){ 
+                                                                                                         success: function (data){ 
                                                                                                                                console.log(data);  
                                                                                                                                menu = data;
+                                                                                                                               alert( typeof(menu) );
                                                                                                                              }
                                                                                                        });
-                                                                                                alert( typeof(menu) );
-                                                                                                //alert( menu );
                                                                                                 return menu;
-                                                                                                alert( typeof(contextMenu(selectedItem)) );
-                                                                                                return contextMenu(selectedItem);
                                                                                               }
                                                /**/
                                              }
