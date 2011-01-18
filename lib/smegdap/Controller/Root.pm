@@ -83,16 +83,16 @@ sub jstreemenu : Local {
                                'children' => [ {
                                                  'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
                                                  'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                 'children' => [ {
+                                                                   'attr' => { 'id' => 'host:', "rel" => "folder" },
+                                                                   'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                                 },
+                                                                 {
+                                                                   'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
+                                                                   'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                                 },
+                                                               ],
                                                }
-                                               'children' => [ {
-                                                                 'attr' => { 'id' => 'host:', "rel" => "folder" },
-                                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
-                                                               },
-                                                               {
-                                                                 'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
-                                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
-                                                               },
-                                                             ],
                                               ],
 #                               'children' => [
 #                                               {
