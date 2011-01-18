@@ -19,7 +19,33 @@ dpkg -i libcatalyst-model-ldap-perl_0.17-1_all.deb
 
 git clone git://github.com/fapestniegd/smegdap.git
 smegdap/bin/local_config # <-- parse /etc/ldap/ldap.conf and write authconfig.yaml
-smegdap/script/smegdap_server.pl
+smegdap/script/smegdap_server.pl  #<-- run on prort 3000 (no ssl)
+
+
+################################################################################
+# apache with ssl: (so you're not passing ldap credentials in the clear)
+################################################################################
+apt-get install -y apache2-mpm-prefork libapache2-mod-perl2                  \
+                   libcatalyst-engine-apache-perl perlmagick                 \
+                   libcatalyst-modules-extra-perl libcatalyst-modules-perl   \
+                   libcatalyst-perl libcatalyst-plugin-session-fastmmap-perl \
+                   libcatalyst-view-tt-perl libhtml-prototype-perl
+(cd /etc/apache2/sites-enabled; ln -s ../sites-available/default-ssl 001-ssl)
+(cd /etc/apache2/mods-enabled; ln -s ../mods-available/ssl.load)
+(cd /etc/apache2/mods-enabled; ln -s ../mods-available/ssl.conf)
+
+cat<<EOF>/etc/apache2/conf.d/smegdap
+PerlSwitches -I/var/cache/git/smegdap/lib
+PerlModule smegdap
+#<VirtualHost..>
+    <Location /smegdap>
+        SetHandler          modperl
+        PerlResponseHandler smegdap
+    </Location>
+#</VirtualHost..>
+EOF
+mkdir -p /var/www/smegdap
+/etc/init.d/apache2 restart
 
 ################################################################################
 # Thoughts

@@ -47,7 +47,7 @@ sub json_wrap{
 sub default :Private {
     my ( $self, $c ) = @_;
     # remove this if not running in apache (can we do this automatically?)
-    # $c->require_ssl;
+    $c->require_ssl;
     ############################################################################
     # Attempt to authenticate if credentials were passed
     ############################################################################
@@ -57,16 +57,11 @@ sub default :Private {
     ############################################################################
     # If the session user isn't defined, forward to logout.
     ############################################################################
-    if(! defined( $c->session->{'user'} )){
-        $c->forward('logout');
-    }
+    if(! defined( $c->session->{'user'} )){ $c->forward('logout'); }
     ############################################################################
     # Log us out if ?logout=1 was sent
     ############################################################################
-    if(defined($c->req->param("logout"))){
-        # Forward to the logout action/method in this controller
-        $c->forward('logout');
-    }
+    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
     ############################################################################
     # If we're logged in, send us to the application, othewise the login page.
     ############################################################################
