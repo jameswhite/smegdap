@@ -7,7 +7,7 @@ function contextMenu(clickeditem){
                               "separator_before" : false,
                               "separator_after"  : true,
                               "label"            : "create server connection",
-                              "action"           : function (obj) { this.jstree ("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } }); }
+                              "action"           : function (obj) { $("certificate_tree").create (clickeditem.attr("id"), "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } }); }
                       },
                }
     }else if(clickeditem.attr("rel") == "logout"){
