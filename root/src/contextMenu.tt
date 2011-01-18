@@ -26,7 +26,7 @@ function contextMenu(clickeditem){
                  "create" : {
                               "separator_before" : false,
                               "separator_after"  : true,
-                              "label"            : "logout",
+                              "label"            : "yes, logout",
                               "action"           : function (obj) { this.create(obj); }
                       },
                }
