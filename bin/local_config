@@ -7,6 +7,7 @@ my $var;
 ################################################################################
 # Scrape our ldap.conf to get our read-only credentials
 ################################################################################
+print "Trying to get ldap connection information from /etc/ldap/ldap.conf\n";
 if(-f "/etc/ldap/ldap.conf"){
     $fh = FileHandle->new;
     if($fh->open("< /etc/ldap/ldap.conf")) {
@@ -44,8 +45,9 @@ foreach my $vitem (@variables){
     }
 }
 exit unless $ready;
+print "Everything looks good...\n";
 ################################################################################
-# figure out where we are so we can find our authconfig template
+# Get our domain's certificate tree
 ################################################################################
 use Net::DNS;
 my $ca_basedn='';
@@ -79,7 +81,7 @@ my $bin=$0;
 my $dir=$1 if($bin=~m/(.*)\/[^\/]+/);
 chdir $dir; $dir=getcwd;
 $dir=~s/\/bin//;
-$config="$dir/authconfig.yaml.template";
+$config="$dir/authconfig.template";
 
 ################################################################################
 # Now we write out our template
