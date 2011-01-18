@@ -234,7 +234,7 @@ sub contextmenu : Local {
 }
 sub login : Global {
     my ( $self, $c ) = @_;
-    barf;
+    $c->forward('barf');
 
     $c->authenticate({
                        id       => $c->req->param("username"),
