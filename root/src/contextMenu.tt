@@ -1,5 +1,6 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
+    alert(clickeditem[0].type);
     if(clickeditem[0].id == "connections"){
         return {
                  "create" : {
