@@ -1,6 +1,6 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    console.log(clickeditem);
+    console.log(clickeditem.get_type);
     if(clickeditem.attr("rel") == "drive"){
         return {
                  "create" : {
