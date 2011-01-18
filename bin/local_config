@@ -90,7 +90,7 @@ $config="$dir/authconfig.template";
 my $template;
 
 if(-f "$config"){
-    my $newconfig = $config; my $newconfig=~s/\.template/\.yaml/;
+    my $newconfig = $config; $newconfig=~s/\.template/\.yaml/;
     my $config_buffer;
     my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1, ABSOLUTE => 1 };
     my $template = Template->new($ttconfig);
