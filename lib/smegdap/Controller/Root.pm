@@ -84,12 +84,12 @@ sub jstreemenu : Local {
                                                  'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
                                                  'data' => { 'title' => 'websages.com', 'state' => 'closed'},
                                                  'children' => [ {
-                                                                   'attr' => { 'id' => 'host:', "rel" => "folder" },
-                                                                   'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                                   'attr' => { 'id' => 'host:odin.websages.com', "rel" => "folder" },
+                                                                   'data' => { 'title' => 'ldaps://odin.websages.com:636', 'state' => 'closed'},
                                                                  },
                                                                  {
-                                                                   'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
-                                                                   'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                                   'attr' => { 'id' => 'host:freyr.websages.com', "rel" => "folder" },
+                                                                   'data' => { 'title' => 'ldaps://freyr.websages.com:636', 'state' => 'closed'},
                                                                  },
                                                                ],
                                                }
