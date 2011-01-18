@@ -234,7 +234,7 @@ sub contextmenu : Local {
 }
 sub login : Global {
     my ( $self, $c ) = @_;
-    print STDERR Data::Dumper->Dump([$self->config]);
+    barf;
 
     $c->authenticate({
                        id       => $c->req->param("username"),
