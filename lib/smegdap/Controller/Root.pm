@@ -234,8 +234,6 @@ sub contextmenu : Local {
 }
 sub login : Global {
     my ( $self, $c ) = @_;
-    $c->forward('barf');
-
     $c->authenticate({
                        id       => $c->req->param("username"),
                        password => $c->req->param("password")
@@ -243,6 +241,7 @@ sub login : Global {
     if(defined($c->user)){
         $c->session->{'user'}=$c->user;
         $c->stash->{'orgunit'}='People';
+        $c->forward('application');
     }else{
         $c->authenticate({
                            id       => $c->req->param("username"),
