@@ -33,7 +33,7 @@ function tree(){
                                                "types" :     {
                                     
                                                                "default" : {
-                                                                             "valid_children" : "none"
+                                                                             "valid_children" : "none",
                                                                              "icon" : {
                                                                                        "image" : "static/images/file.png"
                                                                                       }
