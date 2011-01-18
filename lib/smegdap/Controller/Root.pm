@@ -80,6 +80,20 @@ sub jstreemenu : Local {
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
                                'data' => { 'title' => 'Connections', 'state' => 'closed'},
+                               'children' => [ {
+                                                 'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
+                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                               }
+                                               'children' => [ {
+                                                                 'attr' => { 'id' => 'host:', "rel" => "folder" },
+                                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                               },
+                                                               {
+                                                                 'attr' => { 'id' => 'domain:websages.com', "rel" => "folder" },
+                                                                 'data' => { 'title' => 'websages.com', 'state' => 'closed'},
+                                                               },
+                                                             ],
+                                              ],
 #                               'children' => [
 #                                               {
 #                                                 'attr' => { 'id' => 'host:faraday.eftdomain.net', "rel" => "folder" },
