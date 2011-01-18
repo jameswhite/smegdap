@@ -29,7 +29,7 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config( name => 'smegdap' );
-__PACKAGE__->config( YAML::LoadFile( file(__PACKAGE__->config->{home}, 'authconfig.yaml') ) );
+__PACKAGE__->config->{'authentication'} = ( YAML::LoadFile( file(__PACKAGE__->config->{home}, 'authconfig.yaml') ) );
 # Start the application
 __PACKAGE__->setup( qw/RequireSSL/ );
 __PACKAGE__->config->{require_ssl} = { remain_in_ssl => 1, no_cache => 1, };

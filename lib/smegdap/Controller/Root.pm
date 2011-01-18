@@ -52,40 +52,13 @@ sub default :Path {
     # Attempt to authenticate if credentials were passed
     ############################################################################
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
-        $c->authenticate({
-                           id       => $c->req->param("username"),
-                           password => $c->req->param("password")
-                         }, 'ldap-people');
-        if(defined($c->user)){
-
-            $c->session->{'user'}=$c->user;
-        }else{
-            $c->authenticate({
-                               id       => $c->req->param("username"),
-                               password => $c->req->param("password")
-                             },
-                             'ldap-hosts');
-            if(defined($c->user)){
-                $c->session->{'user'}=$c->user;
-            }else{
-                $c->stash->{'ERROR'}="Authentication Failed.";
-                $c->forward('logout');
-            }
-        }
+        $c->forward('login');
     }
     ############################################################################
     # If the session user isn't defined, forward to logout.
     ############################################################################
     if(! defined( $c->session->{'user'} )){
         $c->forward('logout');
-        $c->detach();
-    }else{
-        if($c->session->{'user'}->{'auth_realm'} eq "ldap-hosts"){
-                $c->stash->{'orgunit'}='Hosts';
-        }
-        if($c->session->{'user'}->{'auth_realm'} eq "ldap-people"){
-            $c->stash->{'orgunit'}='People';
-        }
     }
     ############################################################################
     # Log us out if ?logout=1 was sent
@@ -98,32 +71,35 @@ sub default :Path {
     # If we're logged in, send us to the application, othewise the login page.
     ############################################################################
     if(!defined $c->session->{'user'}){
-        $c->stash->{template}="login.tt";
+        $c->stash->{template}="default.tt";
         $c->detach();
-    }else{
-        if( $c->request->arguments->[0]){
-            if( $c->request->arguments->[0] eq "contextmenu" ){
-                $c->forward('contextmenu');
-                $c->detach();
-            }elsif( $c->request->arguments->[0] eq "form" ){
-                $c->forward('selectform');
-                $c->detach();
-            }elsif( $c->request->arguments->[0] eq "jstree" ){
-                $c->forward('jstreemenu');
-                $c->detach();
-            }elsif( $c->request->arguments->[0] eq "rename" ){
-                $c->response->headers->header( 'content-type' => "application/json" );
-                $c->res->body($self->json_wrap({'status' => 1}));
-            }elsif( $c->request->arguments->[0] eq "select" ){
-                $c->response->headers->header( 'content-type' => "application/json" );
-                $c->res->body($self->json_wrap({'status' => 1}));
-            }else{
-                $c->response->headers->header( 'content-type' => "application/json" );
-                $c->res->body($self->json_wrap({'status' => 1}));
-            }
+    }
+}
+
+sub application :Path {
+    my ( $self, $c ) = @_;
+    if( $c->request->arguments->[0]){
+        if( $c->request->arguments->[0] eq "contextmenu" ){
+            $c->forward('contextmenu');
+            $c->detach();
+        }elsif( $c->request->arguments->[0] eq "form" ){
+            $c->forward('selectform');
+            $c->detach();
+        }elsif( $c->request->arguments->[0] eq "jstree" ){
+            $c->forward('jstreemenu');
+            $c->detach();
+        }elsif( $c->request->arguments->[0] eq "rename" ){
+            $c->response->headers->header( 'content-type' => "application/json" );
+            $c->res->body($self->json_wrap({'status' => 1}));
+        }elsif( $c->request->arguments->[0] eq "select" ){
+            $c->response->headers->header( 'content-type' => "application/json" );
+            $c->res->body($self->json_wrap({'status' => 1}));
         }else{
-            $c->stash->{'template'}="application.tt";
+            $c->response->headers->header( 'content-type' => "application/json" );
+            $c->res->body($self->json_wrap({'status' => 1}));
         }
+    }else{
+        $c->stash->{'template'}="application.tt";
     }
 }
 
@@ -256,6 +232,33 @@ sub contextmenu : Local {
     $c->res->body($json);
 
 }
+sub login : Global {
+    my ( $self, $c ) = @_;
+    print STDERR Data::Dumper->Dump([$self->config]);
+
+    $c->authenticate({
+                       id       => $c->req->param("username"),
+                       password => $c->req->param("password")
+                     }, 'ldap-people');
+    if(defined($c->user)){
+        $c->session->{'user'}=$c->user;
+        $c->stash->{'orgunit'}='People';
+    }else{
+        $c->authenticate({
+                           id       => $c->req->param("username"),
+                           password => $c->req->param("password")
+                         },
+                         'ldap-hosts');
+        if(defined($c->user)){
+            $c->session->{'user'}=$c->user;
+            $c->stash->{'orgunit'}='Hosts';
+            $c->forward('application');
+        }else{
+            $c->stash->{'ERROR'}="Authentication Failed.";
+            $c->forward('logout');
+        }
+    }
+}
 
 sub logout : Global {
     my ( $self, $c ) = @_;
@@ -266,6 +269,7 @@ sub logout : Global {
     delete $c->session->{'username'};
     # expire our session
     $c->delete_session("logout");
+    $c->stash->{template}="default.tt";
     $c->res->redirect('/') if $justloggedout;
     $c->detach();
 }
