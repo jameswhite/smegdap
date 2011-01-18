@@ -90,13 +90,13 @@ $config="$dir/authconfig.template";
 my $template;
 
 if(-f "$config"){
-    my $newconfig;
-    $newconfig=~s/\.template/\.yaml/;
+    my $newconfig = $config; my $newconfig=~s/\.template/\.yaml/;
+    my $config_buffer;
     my $ttconfig = { INCLUDE_PATH => $dir, INTERPOLATE  => 1, POST_CHOMP   => 1, ABSOLUTE => 1 };
     my $template = Template->new($ttconfig);
-    $template->process($config, $var, \$newconfig) || die $template->error();
+    $template->process($config, $var, \$config_buffer) || die $template->error();
     my $struct = YAML::Load($newconfig);
-    print Data::Dumper->Dump([$struct]);
+    YAML::Dump($newconfig,$config_buffer);
 }
 # $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
 
