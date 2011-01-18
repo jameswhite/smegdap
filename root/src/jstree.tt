@@ -74,7 +74,7 @@ function tree(){
                                                items: function fetchContextMeny(selectedItem) { 
                                                                                                 var menu;
                                                                                                 $.ajax({
-                                                                                                         url: '/contextmenu/' + selectedItem[0].id ,
+                                                                                                         url: 'contextmenu/' + selectedItem[0].id ,
                                                                                                          async : false,
                                                                                                          dataType: 'json',
                                                                                                          success: function (data){ 
@@ -116,7 +116,7 @@ function tree(){
                                                                                                   $.ajax({
                                                                                                            async : false,
                                                                                                            type: 'POST',
-                                                                                                           url: "/remove/" + data.rslt.parent.attr("id").replace("node_",""),
+                                                                                                           url: "remove/" + data.rslt.parent.attr("id").replace("node_",""),
                                                                                                            data : { 
                                                                                                                    "operation" : "remove_node", 
                                                                                                                    "id" : this.id.replace("node_","")
@@ -152,7 +152,7 @@ function tree(){
                                                                             $.ajax({
                                                                                     async : false,
                                                                                     type: 'POST',
-                                                                                    url: "/move/" + data.rslt.parent.attr("id").replace("node_",""),
+                                                                                    url: "move/" + data.rslt.parent.attr("id").replace("node_",""),
                                                                                     data : { 
                                                                                             "operation" : "move_node", 
                                                                                             "id" : $(this).attr("id").replace("node_",""), 
@@ -185,7 +185,7 @@ function tree(){
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
-                                                                               url: "/select/" + data.rslt.obj.attr("id").replace("node_",""),
+                                                                               url: "select/" + data.rslt.obj.attr("id").replace("node_",""),
                                                                                data : { 
                                                                                         "operation" : "select_node", 
                                                                                         "id" : data.rslt.obj.attr("id").replace("node_",""),

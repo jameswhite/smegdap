@@ -75,7 +75,7 @@ sub default :Private {
 sub application :Private {
     my ( $self, $c ) = @_;
     if( $c->request->arguments->[0]){
-        shift @{ $c->request->arguments } if( $c->request->arguments->[0] eq "smegdap" );
+        # shift @{ $c->request->arguments } if( $c->request->arguments->[0] eq "smegdap" );
         if( $c->request->arguments->[0] eq "contextmenu" ){
             $c->forward('contextmenu');
             $c->detach();
