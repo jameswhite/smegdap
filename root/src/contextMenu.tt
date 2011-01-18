@@ -16,7 +16,7 @@ function contextMenu(clickeditem){
                               "separator_before" : false,
                               "separator_after"  : true,
                               "label"            : "logout",
-                              "action"           : function (obj) { this.create(obj); }
+                              "action"           : function (obj) { this("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } }); }
                       },
                }
     }else{
