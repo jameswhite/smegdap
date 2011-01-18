@@ -1,6 +1,6 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    if(clickeditem[0].id == "connnections"){
+    if(clickeditem[0].id == "connections"){
         return {
                  "create" : {
                               "separator_before" : false,
