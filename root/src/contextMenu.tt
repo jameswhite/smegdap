@@ -1,13 +1,13 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    console.log(this);
+    //console.log(this);
     if(clickeditem.attr("rel") == "drive"){
         return {
                  "create" : {
                               "separator_before" : false,
                               "separator_after"  : true,
                               "label"            : "create server connection",
-                              "action"           : function (obj) { this.create(obj); }
+                              "action"           : function (obj) { this("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } }); }
                       },
                }
     }else if(clickeditem.attr("rel") == "logout"){
@@ -16,7 +16,7 @@ function contextMenu(clickeditem){
                               "separator_before" : false,
                               "separator_after"  : true,
                               "label"            : "logout",
-                              "action"           : function (obj) { this("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } }); }
+                              "action"           : function (obj) { this.create(obj); }
                       },
                }
     }else{
