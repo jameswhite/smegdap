@@ -49,7 +49,7 @@ sub default :Path {
     # remove this if not running in apache (can we do this automatically?)
     # $c->require_ssl;
     ############################################################################
-    # Attempt to authenticate
+    # Attempt to authenticate if credentials were passed
     ############################################################################
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
         $c->authenticate({
@@ -73,8 +73,12 @@ sub default :Path {
             }
         }
     }
+    ############################################################################
+    # If the session user isn't defined, forward to logout.
+    ############################################################################
     if(! defined( $c->session->{'user'} )){
         $c->forward('logout');
+        $c->detach();
     }else{
         if($c->session->{'user'}->{'auth_realm'} eq "ldap-hosts"){
                 $c->stash->{'orgunit'}='Hosts';

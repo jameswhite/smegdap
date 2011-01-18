@@ -3,7 +3,8 @@
                        libcatalyst-perl libcatalyst-modules-perl               \
                        libcatalyst-modules-extra-perl                          \
                        libnet-ldap-perl libnet-ldap-server-perl                \
-                       libconvert-asn1-perl libmoose-perl
+                       libconvert-asn1-perl libmoose-perl                      \
+                       libcatalyst-plugin-requiressl-perl
 
 ################################################################################
 wget -O Catalyst-Model-LDAP-0.17.tar.gz \
@@ -15,6 +16,7 @@ dpkg -i libcatalyst-model-ldap-perl_0.17-1_all.deb
 ################################################################################
 
 git clone git://github.com/fapestniegd/smegdap.git
+smegdap/bin/local_config # <-- parse /etc/ldap/ldap.conf and write authconfig.yaml
 smegdap/script/smegdap_server.pl
 
 ################################################################################
