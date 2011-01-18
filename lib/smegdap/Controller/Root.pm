@@ -44,7 +44,7 @@ sub index :Path :Args(0) {
     $c->forward('default');
 }
 
-sub default :Path {
+sub default :Private {
     my ( $self, $c ) = @_;
     # remove this if not running in apache (can we do this automatically?)
     # $c->require_ssl;
@@ -76,7 +76,7 @@ sub default :Path {
     }
 }
 
-sub application :Path {
+sub application :Private {
     my ( $self, $c ) = @_;
     if( $c->request->arguments->[0]){
         if( $c->request->arguments->[0] eq "contextmenu" ){
