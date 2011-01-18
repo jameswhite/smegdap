@@ -8,8 +8,16 @@ function contextMenu(clickeditem){
                               "separator_after"  : true,
                               "label"            : "create server connection",
                               "action"           : function (obj) { 
-                                                                    console.log(obj);
-                                                                    this.create(); 
+                                                                    this.create(
+                                                                                obj,
+                                                                                "last",
+                                                                                { 
+                                                                                  "attr": { "id"   : "node_4", "rel"  : "folder" },
+                                                                                  "data": { "title": "node_4", "state": ""  },
+                                                                                },
+                                                                                null,
+                                                                                0
+                                                                               ); 
                                                                   }
                       },
                }
