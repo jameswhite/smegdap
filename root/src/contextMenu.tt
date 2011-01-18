@@ -1,7 +1,7 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    console.log(clickeditem[0].rel);
-    if(clickeditem[0].rel == "drive"){
+    console.log(clickeditem.attr("rel"));
+    if(clickeditem[0]. == "drive"){
         return {
                  "create" : {
                               "separator_before" : false,
