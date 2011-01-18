@@ -96,7 +96,7 @@ if(-f "$config"){
     my $template = Template->new($ttconfig);
     $template->process($config, $var, \$config_buffer) || die $template->error();
     my $struct = YAML::Load($config_buffer);
-    YAML::Dump($config_buffer);
+    print YAML::Dump($struct);
 }
 # $template->{'authentication'}->{'realms'}->{'ldap-hosts'}->{'store'}->{'ldap_server'}=YAML::Load(YAML::Dump($var->{'LDAP_URI'}));
 
