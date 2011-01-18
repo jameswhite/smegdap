@@ -111,6 +111,6 @@ $template->{'global'}->{'crl_base'}="https://pki.$dnsdomain";
 
 if($config=~m/(.*)/){
     my $newconfig=$1;
-    $newconfig=~s/\.template//;
+    $newconfig=~s/\.template/\.yaml/;
     YAML::DumpFile($newconfig,$template);
 }
