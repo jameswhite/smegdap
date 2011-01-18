@@ -6,7 +6,7 @@ function contextMenu(clickeditem){
                  "create" : {
                               "separator_before" : false,
                               "separator_after"  : true,
-                              "label"            : "create server connection",
+                              "label"            : "add connections by domain",
                               "action"           : function (obj) { 
                                                                     this.create(
                                                                                 obj,
@@ -15,7 +15,7 @@ function contextMenu(clickeditem){
                                                                                   "attr": { "id"   : "", "rel"  : "folder" },
                                                                                   "data": { "title": "", "state": ""  },
                                                                                 },
-                                                                                null,
+                                                                                null, /* we should save the connection in the session */
                                                                                 0
                                                                                ); 
                                                                   }
