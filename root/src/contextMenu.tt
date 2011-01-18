@@ -1,11 +1,20 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    if(clickeditem[0].id == "conn"){
+    if(clickeditem[0].id == "connnections"){
         return {
                  "create" : {
                               "separator_before" : false,
                               "separator_after"  : true,
-                              "label"            : "create",
+                              "label"            : "create server connection",
+                              "action"           : function (obj) { this.create(obj); }
+                      },
+               }
+    }else if(clickeditem[0].id == "logout"){
+        return {
+                 "create" : {
+                              "separator_before" : false,
+                              "separator_after"  : true,
+                              "label"            : "logout",
                               "action"           : function (obj) { this.create(obj); }
                       },
                }
