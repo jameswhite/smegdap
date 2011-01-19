@@ -57,10 +57,28 @@ sub default :Private {
 
 sub mobile_app :Private {
     my ( $self, $c ) = @_;
+    ############################################################################
+    # Attempt to authenticate if credentials were passed
+    ############################################################################
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
         $c->forward('login');
     }
-    $c->stash->{'template'} = "mobile_login.tt";
+    ############################################################################
+    # If the session user isn't defined, forward to logout.
+    ############################################################################
+    if(! defined( $c->session->{'user'} )){ $c->forward('logout'); }
+    ############################################################################
+    # Log us out if ?logout=1 was sent
+    ############################################################################
+    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
+    ############################################################################
+    # If we're logged in, send us to the application, othewise the login page.
+    ############################################################################
+    if(!defined $c->session->{'user'}){
+        $c->stash->{template}="mobile_login.tt";
+        $c->detach();
+    }
+    $c->stash->{'template'} = "mobile_app.tt";
 }
 
 sub application :Private {
