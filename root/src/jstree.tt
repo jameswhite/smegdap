@@ -114,11 +114,12 @@ function tree(){
                                                                          function (r) {
                                                                                         if (r.status) {
                                                                                             if (r.structure) {
-                                                                                                /* take the $(data.rslt.obj).structure and replace thie node */
-                                                                                            }else{
+                                                                                                /* take the result's .structure and replace thie node with it */
                                                                                                 $(data.rslt.obj) = r.structure;
+                                                                                            }else{
+                                                                                                $(data.rslt.obj).attr("id", "node_" + r.id);
                                                                                             }
-                                                                                        }else{
+                                                                                        }else {
                                                                                           $.jstree.rollback(data.rlbk);
                                                                                         }
                                                                                       }
