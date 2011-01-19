@@ -104,6 +104,7 @@ sub application :Private {
 
 sub createnode : Local {
     my ( $self, $c ) = @_;
+    my $connections; 
     my @createline = @{ $c->request->arguments }; 
     shift @createline if($createline[0] eq 'create');
     my $what = shift @createline;
@@ -129,7 +130,6 @@ sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
       
-    my $connections; 
     $c->model('DNSResolver')->domain("websages.com");
     push( @{ $menu_tree }, [
                              {
