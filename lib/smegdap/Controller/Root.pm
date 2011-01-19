@@ -121,8 +121,8 @@ sub createnode : Local {
     #
     if($what eq 'domain'){
         $c->model('DNSResolver')->domain($therest);
-        foreach my $type ("_tcp","_tls","_ssl"){
-            my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
+        foreach my $type ("tcp","tls","ssl"){
+            my $records = $c->model('DNSResolver')->srv("_ldap."."_".$type);
             my $children;
             foreach my $record (@{ $records }){
                 push(@{ $children },{
