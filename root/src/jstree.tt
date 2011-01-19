@@ -102,7 +102,6 @@ function tree(){
                              })
                      .jstree("set_theme","default")
                      .bind("create.jstree", function (e, data) {
-alert("enter");
                                                                  $.post(
                                                                          "create/" + data.rslt.parent.attr("id") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
                                                                          { 
@@ -204,7 +203,7 @@ alert("enter");
                                                                           console.log( $("#certificate_tree").jstree("_get_text", trace) );
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
-                                                                      console.log( trace.attr("id") );
+                                                                      console.log( $("#certificate_tree").jstree("_get_text", trace) );
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,
@@ -216,7 +215,7 @@ alert("enter");
                                                                                         "title" : data.rslt.new_name
                                                                                       },
                                                                                success : function (r) {
-                                                                                                        console.log(data.rslt.obj);  
+                                                                                                        //console.log(data.rslt.obj);  
                                                                                                       }
                                                                              })
                                                                     });
