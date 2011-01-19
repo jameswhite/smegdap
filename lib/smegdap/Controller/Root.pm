@@ -107,12 +107,15 @@ sub createnode : Local {
     my $connections; 
     my @createline = @{ $c->request->arguments }; 
     shift @createline if($createline[0] eq 'create');
+    my $where = shift @createline;
     my $what = shift @createline;
-    if(!defined($what)){ 
+    my $therest = join("/",@createline);
+    if(!defined($what)||!defined($where)||!defined($therest)){ 
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({'status' => 0}));
         $c->detach();
     }
+
     if($what eq 'domain'){
         foreach my $type ("_tcp","_tls","_ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
