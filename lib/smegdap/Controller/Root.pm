@@ -48,6 +48,20 @@ sub default :Private {
     my ( $self, $c ) = @_;
     # remove this if not running in apache (can we do this automatically?)
     $c->require_ssl;
+    if($req->user_agent=~m/iPhone/){ $c->forward("mobile_app"); }
+
+    $c->forward('application');
+}
+
+sub mobile_app :Private {
+    my ( $self, $c ) = @_;
+    if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
+        $c->forward('login');
+    }
+}
+
+sub application :Private {
+    my ( $self, $c ) = @_;
     ############################################################################
     # Attempt to authenticate if credentials were passed
     ############################################################################
@@ -69,11 +83,6 @@ sub default :Private {
         $c->stash->{template}="default.tt";
         $c->detach();
     }
-    $c->forward('application');
-}
-
-sub application :Private {
-    my ( $self, $c ) = @_;
     if( $c->request->arguments->[0]){
         # shift @{ $c->request->arguments } if( $c->request->arguments->[0] eq "smegdap" );
         if( $c->request->arguments->[0] eq "contextmenu" ){
