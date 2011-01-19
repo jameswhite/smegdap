@@ -204,7 +204,8 @@ function tree(){
                                                                           console.log(txt);
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
-                                                                      console.log( $("#certificate_tree").jstree("_get_text", trace) );
+                                                                      var txt = $("#certificate_tree").jstree("_get_text", trace);
+                                                                      console.log(txt);
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,
