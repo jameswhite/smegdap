@@ -197,12 +197,12 @@ alert("enter");
                                                                       $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
-                                                                      $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       var trace = data.rslt.obj;
                                                                       while( trace ){
                                                                           console.log( $("#certificate_tree").jstree("_get_text", trace) );
-                                                                          trace = $("#certificate_tree").jstree("_get_parent", data.rslt.obj);
+                                                                          trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       )
+                                                                      $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
