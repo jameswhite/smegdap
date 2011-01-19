@@ -133,7 +133,7 @@ sub createnode : Local {
             push(@{ $connections },{
                                      'attr' => { 'id'    => "$type", 'rel'   => 'connection' },
                                      'data' => { 'title' => "$type", 'state' => ''           }
-                                     'children' => $children;
+                                     'children' => $children,
                                    }) if $children;
         }
         if(!defined($connections)){
