@@ -1,6 +1,27 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
     switch( clickeditem.attr("rel") ){
+    case "connection":
+        return {
+                 "nctexts" : {
+                              "separator_before" : false,
+                              "separator_after"  : false,
+                              "label"            : "get namingcontexts",
+                              "action"           : function (obj) { 
+                                                                    this.create(
+                                                                                obj,
+                                                                                "last",
+                                                                                { 
+                                                                                  "attr": { "id"   : "", "rel"  : "connection" },
+                                                                                  "data": { "title": "ldap://ldap.example.org:389", "state": ""  },
+                                                                                },
+                                                                                null, /* we should save the connection in the session */
+                                                                                0
+                                                                               ); 
+                                                                  }
+                            },
+               }
+        break;
     case "drive":
     case "domain":
         return {
