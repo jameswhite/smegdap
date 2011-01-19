@@ -103,12 +103,12 @@ sub application :Private {
 sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
-    my @connections; 
+    my $connections; 
     $c->model('DNSResolver')->domain("websages.com");
-    push( @connections, @{ $c->model('DNSResolver')->srv("_ldap._tcp") });
-    push( @connections, @{ $c->model('DNSResolver')->srv("_ldap._tls") });
-    
-    print STDERR Data::Dumper->Dump([$c->model('DNSResolver')->domain]);
+    foreach my $type ("_tcp","_tls","_ssl"){
+        my $records = $c->model('DNSResolver')->srv($type."._tcp")
+        push (@{ $connections->{$type} }, @{ $records }) if $records;
+    }
     print STDERR Data::Dumper->Dump([@connections]);
     push( @{ $menu_tree }, [
                              {
