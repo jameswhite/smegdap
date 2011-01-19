@@ -141,7 +141,6 @@ sub createnode : Local {
             $c->res->body($self->json_wrap({'status' => 0}));
             $c->detach();
         }
-        print STDERR Data::Dumper->Dump([$connections]);
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({
                                          'status' => 1,
