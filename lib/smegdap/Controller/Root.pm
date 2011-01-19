@@ -143,7 +143,7 @@ sub createnode : Local {
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({
                                          'status' => 1,
-                                         'id'     => "connections:$where:$therest",
+                                         'id'     => "$where:$therest",
                                          'children' => $connections
                                        }));
         $c->detach();
