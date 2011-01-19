@@ -200,7 +200,8 @@ function tree(){
                                                                       var count=0;
                                                                       while( trace.attr("id") != "certificate_tree" && count++ < 5 ){
                                                                           //console.log( trace.attr("id") );
-                                                                          console.log( $("#certificate_tree").jstree("_get_text", trace) );
+                                                                          var txt = $("#certificate_tree").jstree("_get_text", trace);
+                                                                          console.log(txt);
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
                                                                       console.log( $("#certificate_tree").jstree("_get_text", trace) );
