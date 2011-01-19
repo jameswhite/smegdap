@@ -110,18 +110,24 @@ sub createnode : Local {
     my $where = shift @createline;
     my $what = shift @createline;
     my $therest = join("/",@createline);
+
+    # reject the change if we don't have enough information
     if(!defined($what)||!defined($where)||!defined($therest)){ 
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({'status' => 0}));
         $c->detach();
     }
 
+    #
     if($what eq 'domain'){
         foreach my $type ("_tcp","_tls","_ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
             push (@{ $connections->{$type} }, @{ $records }) if $records;
         }
         print STDERR Data::Dumper->Dump([$connections]);
+        $c->response->headers->header( 'content-type' => "application/json" );
+        $c->res->body($self->json_wrap({'status' => 0}));
+        $c->detach();
     }
     #foreach my $type(keys(%{ $connections }){
     #}
