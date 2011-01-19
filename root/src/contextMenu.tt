@@ -5,7 +5,7 @@ function contextMenu(clickeditem){
                  "domain" : {
                               "separator_before" : false,
                               "separator_after"  : false,
-                              "label"            : "add a domain",
+                              "label"            : "add domain",
                               "action"           : function (obj) { 
                                                                     this.create(
                                                                                 obj,
@@ -19,10 +19,10 @@ function contextMenu(clickeditem){
                                                                                ); 
                                                                   }
                             },
-                 "folder" : {
+                 "group"  : {
                               "separator_before" : false,
                               "separator_after"  : false,
-                              "label"            : "add a server group",
+                              "label"            : "add server group",
                               "action"           : function (obj) { 
                                                                     this.create(
                                                                                 obj,
@@ -35,7 +35,24 @@ function contextMenu(clickeditem){
                                                                                 0
                                                                                ); 
                                                                   }
-                      },
+                            },
+                 "server" : {
+                              "separator_before" : false,
+                              "separator_after"  : false,
+                              "label"            : "add server connection"
+                              "action"           : function (obj) { 
+                                                                    this.create(
+                                                                                obj,
+                                                                                "last",
+                                                                                { 
+                                                                                  "attr": { "id"   : "", "rel"  : "default" },
+                                                                                  "data": { "title": "", "state": ""  },
+                                                                                },
+                                                                                null, /* we should save the connection in the session */
+                                                                                0
+                                                                               ); 
+                                                                  }
+                            },
                }
     }else if(clickeditem.attr("rel") == "logout"){
         return {
