@@ -46,6 +46,7 @@ sub json_wrap{
 
 sub default :Private {
     my ( $self, $c ) = @_;
+    print STDERR "default\n";
     ############################################################################
     # remove this if not running in apache (can we do this automatically?)
     ############################################################################
@@ -293,6 +294,7 @@ sub contextmenu : Local {
 }
 sub login : Global {
     my ( $self, $c ) = @_;
+    print STDERR "login\n";
     $c->authenticate({
                        id       => $c->req->param("username"),
                        password => $c->req->param("password")
@@ -320,6 +322,7 @@ sub login : Global {
 
 sub logout : Global {
     my ( $self, $c ) = @_;
+    print STDERR "logout\n";
     # remove all user handles
     my $justloggedout=0;
     $justloggedout=1 if(defined $c->session->{'user'});
