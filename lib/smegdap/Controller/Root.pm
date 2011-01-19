@@ -59,6 +59,7 @@ sub default :Private {
     # If we're logged in, send us to the appropriate application.
     ############################################################################
     if(defined $c->session->{'user'}){
+        print STDERR "user defined";
         if($c->req->user_agent=~m/iPhone/){ 
             $c->forward("mobile_app"); 
         }else{
