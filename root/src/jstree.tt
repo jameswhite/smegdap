@@ -200,7 +200,7 @@ alert("enter");
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                     
                                                                       console.log(data.rslt.obj.attr("id"));
-                                                                      console.log( $("#certificate_tree").jstree("_get_parent", data.rslt.obj) );
+                                                                      console.log( $("#certificate_tree").jstree("_get_parent", data.rslt.obj).attr("id"));
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
