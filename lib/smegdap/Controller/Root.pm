@@ -123,17 +123,30 @@ sub createnode : Local {
         $c->model('DNSResolver')->domain($therest);
         foreach my $type ("_tcp","_tls","_ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
-            push (@{ $connections->{$type} }, @{ $records }) if $records;
+            my $children;
+            foreach my $record (@{ records }){
+                push(@{ $children },{
+                                      'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
+                                      'data' => { 'title' => "$record", 'state' => ''           }
+                                    });
+            }
+            push(@{ $connections },{
+                                     'attr' => { 'id'    => "$type", 'rel'   => 'connection' },
+                                     'data' => { 'title' => "$type", 'state' => ''           }
+                                   });
+        }
+        if(!defined($connections)){
+            $c->response->headers->header( 'content-type' => "application/json" );
+            $c->res->body($self->json_wrap({'status' => 0}));
+            $c->detach();
         }
         print STDERR Data::Dumper->Dump([$connections]);
-        $c->response->headers->header( 'content-type' => "application/json" );
-        $c->res->body($self->json_wrap({'status' => 0}));
-        $c->detach();
+        #foreach my $type(keys(%{ $connections }){
+             
+        #}
     }
-    #foreach my $type(keys(%{ $connections }){
-    #}
     $c->response->headers->header( 'content-type' => "application/json" );
-    $c->res->body($self->json_wrap({'status' => 1}));
+    $c->res->body($self->json_wrap({'status' => 0}));
 }
 
 sub jstreemenu : Local {
