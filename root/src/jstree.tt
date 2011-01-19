@@ -120,7 +120,7 @@ function tree(){
                                                                                                                                       data.rslt.obj, 
                                                                                                                                       "last",  
                                                                                                                                       { 
-                                                                                                                                        "attr": { "id"   : "", "rel"  : "domain" },
+                                                                                                                                        "attr": { "id"   : "", "rel"  : "folder" },
                                                                                                                                         "data": { "title": "sub.websages.com", "state": ""  }
                                                                                                                                       },
                                                                                                                                       null,
