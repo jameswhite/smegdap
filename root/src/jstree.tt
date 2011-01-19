@@ -198,6 +198,9 @@ alert("enter");
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
+                                                                    
+                                                                      log.console(data.rslt.obj.attr("id"));
+                                                                      log.console( $("#certificate_tree").jstree._get_parent(data.rslt.obj).attr("id"));
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
