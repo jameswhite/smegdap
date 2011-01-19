@@ -111,7 +111,7 @@ sub createnode : Local {
         $c->res->body($self->json_wrap({'status' => 0}));
         $c->detach();
     }
-    if($what eq 'domain'({
+    if($what eq 'domain'){
         foreach my $type ("_tcp","_tls","_ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
             push (@{ $connections->{$type} }, @{ $records }) if $records;
