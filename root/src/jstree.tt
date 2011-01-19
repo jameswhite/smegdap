@@ -114,16 +114,19 @@ function tree(){
                                                                          function (r) {
                                                                                         if (r.status) {
                                                                                             if (r.children) {
-                                                                                                /* take the result's .children and replace thie node with it */
-                                                                                                console.log(data.rslt.obj);
-         //$("#certificate_tree").jstree("create", data.rslt.obj, "inside",{ "data": { "title": "smeg" }, attr:{"id": "smeg", "rel": "default" }  }, function(){ alert("added"); }, true );
-         for(var i=0; i<r.children.length; i++){
-         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[i], function(){ console.log(r.children[i]); }, true );
-         }
-                                                                                                console.log(this);
-                                                                                            //    $(data.rslt.obj).attr("id", r.id);
-                                                                                            //}else{
-                                                                                            //    $(data.rslt.obj).attr("id", r.id);
+                                                                                                for(var i=0; i<r.children.length; i++){
+                                                                                                     $("#certificate_tree").jstree(
+                                                                                                                                    "create", 
+                                                                                                                                    data.rslt.obj, 
+                                                                                                                                    "inside", 
+                                                                                                                                    r.children[i], 
+                                                                                                                                    function(){ console.log(r.children[i]); }, 
+                                                                                                                                    true 
+                                                                                                                                  );
+                                                                                                  }
+                                                                                                  if(r.id){ $(data.rslt.obj).attr("id", r.id); }
+                                                                                            }else{
+                                                                                                  if(r.id){ $(data.rslt.obj).attr("id", r.id); }
                                                                                             }
                                                                                         }else {
                                                                                           $.jstree.rollback(data.rlbk);
