@@ -121,7 +121,7 @@ function tree(){
                                                                                                                                       "last",  
                                                                                                                                       { 
                                                                                                                                         "attr": { "id"   : "", "rel"  : "domain" },
-                                                                                                                                        "data": { "title": "sub.websages.com", "state": ""  },
+                                                                                                                                        "data": { "title": "sub.websages.com", "state": ""  }
                                                                                                                                       },
                                                                                                                                       null,
                                                                                                                                       0
