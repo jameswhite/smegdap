@@ -198,7 +198,8 @@ alert("enter");
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
                                                                       var trace = data.rslt.obj;
-                                                                      while( trace ){
+                                                                      var count=0;
+                                                                      while( trace.attr("id"} != "#certificate_tree" && count++ < 5 ){
                                                                           console.log( $("#certificate_tree").jstree("_get_text", trace) );
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
