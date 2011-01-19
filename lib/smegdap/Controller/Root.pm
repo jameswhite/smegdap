@@ -51,6 +51,10 @@ sub default :Private {
     ############################################################################
     $c->require_ssl;
     ############################################################################
+    # Log us out if ?logout=1 was sent
+    ############################################################################
+    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
+    ############################################################################
     # Attempt to authenticate if credentials were passed
     ############################################################################
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
@@ -60,10 +64,6 @@ sub default :Private {
     # If the session user isn't defined, forward to logout.
     ############################################################################
     if(! defined( $c->session->{'user'} )){ $c->forward('logout'); }
-    ############################################################################
-    # Log us out if ?logout=1 was sent
-    ############################################################################
-    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
     ############################################################################
     # If we're logged in, send us to the application, othewise the login page.
     ############################################################################
@@ -305,7 +305,7 @@ sub login : Global {
     if(defined($c->user)){
         $c->session->{'user'}=$c->user;
         $c->stash->{'orgunit'}='People';
-        $c->forward('application');
+        $c->forward('default');
     }else{
         $c->authenticate({
                            id       => $c->req->param("username"),
@@ -315,7 +315,7 @@ sub login : Global {
         if(defined($c->user)){
             $c->session->{'user'}=$c->user;
             $c->stash->{'orgunit'}='Hosts';
-            $c->forward('application');
+            $c->forward('default');
         }else{
             $c->stash->{'ERROR'}="Authentication Failed.";
             $c->forward('logout');
@@ -332,9 +332,10 @@ sub logout : Global {
     delete $c->session->{'username'};
     # expire our session
     $c->delete_session("logout");
-    $c->stash->{template}="default.tt";
-    $c->res->redirect('/') if $justloggedout;
-    $c->detach();
+    $c->forward('default');
+    #$c->stash->{template}="default.tt";
+    #$c->res->redirect('/') if $justloggedout;
+    #$c->detach();
 }
 
 =head2 end
