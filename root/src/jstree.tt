@@ -208,7 +208,7 @@ function tree(){
                                                                                         "title" : data.rslt.new_name
                                                                                       },
                                                                                success : function (r) {
-                                                                                                        //console.log(data.rslt.obj);  
+                                                                                                        console.log(data.rslt.obj);  
                                                                                                       }
                                                                              })
                                                                     });
