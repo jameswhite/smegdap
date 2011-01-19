@@ -22,7 +22,7 @@
         </style>
     </head>
     <body>
-        <form id="myform" action="" method="POST" class="form">
+        <form action="login.pl" method="POST" class="form">
             <div class="toolbar">
                 <h1>Log in</h1>
             </div>
