@@ -106,7 +106,7 @@ sub jstreemenu : Local {
     my $connections; 
     $c->model('DNSResolver')->domain("websages.com");
     foreach my $type ("_tcp","_tls","_ssl"){
-        my $records = $c->model('DNSResolver')->srv($type."._tcp");
+        my $records = $c->model('DNSResolver')->srv("_ldap."$type);
         print STDERR Data::Dumper->Dump([$records]);
         push (@{ $connections->{$type} }, @{ $records }) if $records;
     }
