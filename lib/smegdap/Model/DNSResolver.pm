@@ -5,6 +5,12 @@ use warnings;
 use parent 'Catalyst::Model';
 use Net::DNS;
 
+sub domain {
+    my $self = shift;
+    $self->{'domain'} = shift if @_;
+    return $self->{'domain'};
+}
+
 # my @users = $c->model('DNSResolver')->get_domain;
 sub srv {
     my $self = shift;
@@ -12,7 +18,7 @@ sub srv {
     return undef unless $search;
     my $res = Net::DNS::Resolver->new;
     my $servers;
-    my $query = $res->query("_ldap._tcp.".$self->{'domain'}, "SRV");
+    my $query = $res->query($search.$self->domain, "SRV");
     if ($query){
         foreach my $rr (grep { $_->type eq 'SRV' } $query->answer) {
             my $host=$rr->{'target'};
