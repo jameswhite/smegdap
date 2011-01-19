@@ -1,6 +1,6 @@
 <script type="text/javascript">
 function contextMenu(clickeditem){
-    switch(clickeditem.attr("rel"){
+    switch( clickeditem.attr("rel") ){
     case "drive":
     case "domain":
         return {
