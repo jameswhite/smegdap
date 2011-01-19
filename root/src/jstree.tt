@@ -198,10 +198,11 @@ alert("enter");
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
-                                                                    
-                                                                      console.log(data.rslt.obj.attr("title"));
-                                                                      console.log( $("#certificate_tree").jstree("_get_parent", data.rslt.obj).attr("title"));
-                                                                      console.log( $("#certificate_tree").jstree("_get_children", $("#certificate_tree").jstree("_get_parent", data.rslt.obj) ) );
+                                                                      var trace = data.rslt.obj;
+                                                                      while( trace ){
+                                                                          console.log( $("#certificate_tree").jstree("_get_text", trace) );
+                                                                          trace = $("#certificate_tree").jstree("_get_parent", data.rslt.obj);
+                                                                      )
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
