@@ -115,7 +115,7 @@ function tree(){
                                                                                         if (r.status) {
                                                                                             if (r.structure) {
                                                                                                 /* take the result's .structure and replace thie node with it */
-                                                                                                $(data.rslt.obj) = r.structure;
+                                                                                                $(data.rslt.obj).children(r.structure);
                                                                                             }else{
                                                                                                 $(data.rslt.obj).attr("id", "node_" + r.id);
                                                                                             }
