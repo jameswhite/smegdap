@@ -125,11 +125,11 @@ sub createnode : Local {
             my $records = $c->model('DNSResolver')->srv("_ldap."."_".$type);
             my $children;
             foreach my $record (@{ $records }){
-                push(@{ $children },{
-                                      'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
-                                      'data' => { 'title' => "$record", 'state' => ''           },
-                                    });
-            }
+            #    push(@{ $children },{
+            #                          'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
+            #                          'data' => { 'title' => "$record", 'state' => ''           },
+            #                        });
+            #}
             push(@{ $connections },{
                                      'attr' => { 'id'    => "$type", 'rel'   => 'folder' },
                                      'data' => { 'title' => "$type", 'state' => ''       },
