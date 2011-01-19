@@ -116,7 +116,7 @@ function tree(){
                                                                                             if (r.structure) {
                                                                                                 /* take the result's .structure and replace thie node with it */
                                                                                                 console.log(data.rslt.obj);
-                              $('#certificate_tree').jstree.create(data.rslt.obj, "last",{ "attr": { "id"   : "", "rel"  : "default" }, "data": { "title": "websages.com", "state": ""  }, }, null, 0 );
+                              $('#certificate_tree').jstree("create" data.rslt.obj, "inside",{ "data": "smeg" }, function(){ alert("added"), true );
                                                                                                 console.log(this);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                             }else{
