@@ -333,9 +333,13 @@ sub logout : Global {
     delete $c->session->{'username'};
     # expire our session
     $c->delete_session("logout");
-    # $c->forward('default');
-    $c->stash->{template}="default.tt";
-    $c->res->redirect('/smegdap/') if $justloggedout;
+    if($c->req->user_agent=~m/iPhone/){ 
+            $c->stash->{template}="mobile_login.tt";
+            $c->detach();
+        }else{
+            $c->stash->{template}="default.tt";
+            $c->detach();
+    }
     $c->detach();
 }
 
