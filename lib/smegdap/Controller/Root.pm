@@ -131,8 +131,8 @@ sub createnode : Local {
                                     });
             }
             push(@{ $connections },{
-                                     'attr' => { 'id'    => "$type", 'rel'   => 'connection' },
-                                     'data' => { 'title' => "$type", 'state' => ''           },
+                                     'attr' => { 'id'    => "$type", 'rel'   => 'folder' },
+                                     'data' => { 'title' => "$type", 'state' => ''       },
                                      'children' => $children,
                                    }) if $children;
         }
@@ -145,7 +145,11 @@ sub createnode : Local {
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({
                                          'status' => 1,
-                                         'structure' => $connections,
+                                         'structure' => {
+                                                          'attr' => { 'id'    => "$therest", 'rel'   => 'folder' },
+                                                          'data' => { 'title' => "$therest", 'state' => ''       },
+                                                          'children' => $connections
+                                                        }
                                        }));
         $c->detach();
     }
