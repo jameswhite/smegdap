@@ -131,7 +131,7 @@ sub createnode : Local {
             #                        });
             #}
             push(@{ $connections },{
-                                     'attr' => { 'id'    => "$type", 'rel'   => 'folder' },
+                                     'attr' => { 'id'    => "$therest:$type", 'rel'   => 'folder' },
                                      'data' => { 'title' => "$type", 'state' => ''       },
                                    }) if $records;
         }
