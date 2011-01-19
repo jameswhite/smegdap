@@ -51,6 +51,11 @@ sub default :Private {
     # remove this if not running in apache (can we do this automatically?)
     ############################################################################
     $c->require_ssl;
+    if( $c->request->arguments->[0]){
+        if( $c->request->arguments->[0] eq "static"){
+            $c->detach();
+        }
+    }
     ############################################################################
     # Log us out if ?logout=1 was sent
     ############################################################################
