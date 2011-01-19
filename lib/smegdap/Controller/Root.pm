@@ -60,7 +60,7 @@ sub mobile_app :Private {
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
         $c->forward('login');
     }
-    $c->stash("mobile_loging.tt");
+    $c->stash->{'template'} = "mobile_loging.tt";
 }
 
 sub application :Private {
