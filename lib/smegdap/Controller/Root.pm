@@ -48,9 +48,11 @@ sub default :Private {
     my ( $self, $c ) = @_;
     # remove this if not running in apache (can we do this automatically?)
     $c->require_ssl;
-    if($req->user_agent=~m/iPhone/){ $c->forward("mobile_app"); }
-
-    $c->forward('application');
+    if($c->req->user_agent=~m/iPhone/){ 
+        $c->forward("mobile_app"); 
+    }else{
+        $c->forward('application');
+    }
 }
 
 sub mobile_app :Private {
@@ -58,6 +60,7 @@ sub mobile_app :Private {
     if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
         $c->forward('login');
     }
+    $c->stash("mobile_loging.tt");
 }
 
 sub application :Private {
