@@ -104,7 +104,7 @@ sub application :Private {
 
 sub createnode : Local {
     my ( $self, $c ) = @_;
-    my @createline = @{ $c->request->arguments )if($createline[0] eq 'create');
+    my @createline = @{ $c->request->arguments } if($createline[0] eq 'create');
     my $what = shift @createline;
     if(!defined($what)){ 
         $c->response->headers->header( 'content-type' => "application/json" );
