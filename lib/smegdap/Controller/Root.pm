@@ -87,7 +87,7 @@ sub default :Private {
 
 sub mobile_app :Private {
     my ( $self, $c ) = @_;
-    $c->stash->{'template'} = mobile_app.tt; 
+    $c->stash->{'template'} = "mobile_app.tt"; 
 }
 
 sub application :Private {
