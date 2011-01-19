@@ -104,10 +104,10 @@ function tree(){
                      .bind("create.jstree", function (e, data) {
 alert("enter");
                                                                  $.post(
-                                                                         "create/" + data.rslt.parent.attr("id").replace("node_","") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
+                                                                         "create/" + data.rslt.parent.attr("id") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
                                                                          { 
                                                                                  "operation" : "create_node", 
-                                                                                 "id" : data.rslt.parent.attr("id").replace("node_",""), 
+                                                                                 "id" : data.rslt.parent.attr("id"), 
                                                                                  "position" : data.rslt.position,
                                                                                  "title" : data.rslt.name,
                                                                                  "type" : data.rslt.obj.attr("rel")
@@ -132,10 +132,10 @@ alert("enter");
                                                                                                   $.ajax({
                                                                                                            async : false,
                                                                                                            type: 'POST',
-                                                                                                           url: "remove/" + data.rslt.parent.attr("id").replace("node_",""),
+                                                                                                           url: "remove/" + data.rslt.parent.attr("id"),
                                                                                                            data : { 
                                                                                                                    "operation" : "remove_node", 
-                                                                                                                   "id" : this.id.replace("node_","")
+                                                                                                                   "id" : this.id,
                                                                                                            }, 
                                                                                                            success : function (r) {
                                                                                                                    if(!r.status) {
@@ -148,10 +148,10 @@ alert("enter");
                           )
                      .bind("rename.jstree", function (e, data) {
                                                                   $.post(
-                                                                          "/rename/" + data.rslt.obj.attr("id").replace("node_","") + "/" + data.rslt.new_name,
+                                                                          "/rename/" + data.rslt.obj.attr("id") + "/" + data.rslt.new_name,
                                                                           { 
                                                                                   "operation" : "rename_node", 
-                                                                                  "id" : data.rslt.obj.attr("id").replace("node_",""),
+                                                                                  "id" : data.rslt.obj.attr("id"),
                                                                                   "title" : data.rslt.new_name
                                                                           }, 
                                                                           function (r) {
@@ -168,11 +168,11 @@ alert("enter");
                                                                             $.ajax({
                                                                                     async : false,
                                                                                     type: 'POST',
-                                                                                    url: "move/" + data.rslt.parent.attr("id").replace("node_",""),
+                                                                                    url: "move/" + data.rslt.parent.attr("id"),
                                                                                     data : { 
                                                                                             "operation" : "move_node", 
-                                                                                            "id" : $(this).attr("id").replace("node_",""), 
-                                                                                            "ref" : data.rslt.np.attr("id").replace("node_",""), 
+                                                                                            "id" : $(this).attr("id"),
+                                                                                            "ref" : data.rslt.np.attr("id"),
                                                                                             "position" : data.rslt.cp + i,
                                                                                             "title" : data.rslt.name,
                                                                                             "copy" : data.rslt.cy ? 1 : 0
@@ -182,7 +182,7 @@ alert("enter");
                                                                                                     $.jstree.rollback(data.rlbk);
                                                                                                  }
                                                                                             else {
-                                                                                                    $(data.rslt.oc).attr("id", "node_" + r.id);
+                                                                                                    $(data.rslt.oc).attr("id", r.id);
                                                                                                     if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
                                                                                                             data.inst.refresh(data.inst._get_parent(data.rslt.oc));
                                                                                                     }
@@ -197,14 +197,14 @@ alert("enter");
                                                                       $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
-                                                                      $("#right-pane").load("form/" + data.rslt.obj.attr("id").replace("node_",""));
+                                                                      $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,
                                                                                type: 'POST',
-                                                                               url: "select/" + data.rslt.obj.attr("id").replace("node_",""),
+                                                                               url: "select/" + data.rslt.obj.attr("id"),
                                                                                data : { 
                                                                                         "operation" : "select_node", 
-                                                                                        "id" : data.rslt.obj.attr("id").replace("node_",""),
+                                                                                        "id" : data.rslt.obj.attr("id"),
                                                                                         "title" : data.rslt.new_name
                                                                                       },
                                                                                success : function (r) {
