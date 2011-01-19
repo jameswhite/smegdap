@@ -91,6 +91,8 @@ sub application :Private {
         }elsif( $c->request->arguments->[0] eq "select" ){
             $c->response->headers->header( 'content-type' => "application/json" );
             $c->res->body($self->json_wrap({'status' => 1}));
+        }elsif( $c->request->arguments->[0] eq "create" ){
+            $c->forward('createnode');
         }else{
             $c->response->headers->header( 'content-type' => "application/json" );
             $c->res->body($self->json_wrap({'status' => 1}));
@@ -100,19 +102,34 @@ sub application :Private {
     }
 }
 
+sub createnode : Local {
+    my ( $self, $c ) = @_;
+    my @createline = @{ $c->request->arguments )if($createline[0] eq 'create');
+    my $what = shift @createline;
+    if(!defined($what)){ 
+        $c->response->headers->header( 'content-type' => "application/json" );
+        $c->res->body($self->json_wrap({'status' => 0}));
+        $c->detach();
+    }
+    if($what eq 'domain'({
+        foreach my $type ("_tcp","_tls","_ssl"){
+            my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
+            push (@{ $connections->{$type} }, @{ $records }) if $records;
+        }
+        print STDERR Data::Dumper->Dump([$connections]);
+    }
+    #foreach my $type(keys(%{ $connections }){
+    #}
+    $c->response->headers->header( 'content-type' => "application/json" );
+    $c->res->body($self->json_wrap({'status' => 1}));
+}
+
 sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
       
     my $connections; 
     $c->model('DNSResolver')->domain("websages.com");
-    foreach my $type ("_tcp","_tls","_ssl"){
-        my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
-        print STDERR Data::Dumper->Dump([$records]);
-        push (@{ $connections->{$type} }, @{ $records }) if $records;
-    }
-    #foreach my $type(keys(%{ $connections }){
-    #}
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},

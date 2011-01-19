@@ -38,6 +38,12 @@ function tree(){
                                                                                        "image" : "static/images/file.png"
                                                                                       }
                                                                            },
+                                                            "connection" : {
+                                                                             "valid_children" : "none",
+                                                                             "icon" : {
+                                                                                       "image" : "static/images/file.png"
+                                                                                      }
+                                                                           },
                                                                "logout"  : {
                                                                              "valid_children" : "none",
                                                                              "icon" : {
@@ -45,19 +51,19 @@ function tree(){
                                                                                       }
                                                                            },
                                                                "folder"  : {
-                                                                             "valid_children" : [ "default", "folder" ],
+                                                                             "valid_children" : [ "default", "folder", "connection" ],
                                                                              "icon" : {
                                                                                       "image" : "static/images/folder.png"
                                                                                       }
                                                                            },
                                                                "domain"  : {
-                                                                             "valid_children" : [ "default", "folder" ],
+                                                                             "valid_children" : [ "default", "folder", "connection" ],
                                                                              "icon" : {
                                                                                       "image" : "static/images/folder.png"
                                                                                       }
                                                                            },
                                                                "drive"   : {
-                                                                             "valid_children" : [ "default", "folder", "domain" ],
+                                                                             "valid_children" : [ "default", "folder", "domain", "connection" ],
                                                                              "icon" : {
                                                                                         "image" : "static/images/root.png"
                                                                                       },

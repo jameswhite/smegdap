@@ -45,7 +45,7 @@ function contextMenu(clickeditem){
                                                                                 obj,
                                                                                 "last",
                                                                                 { 
-                                                                                  "attr": { "id"   : "", "rel"  : "default" },
+                                                                                  "attr": { "id"   : "", "rel"  : "connection" },
                                                                                   "data": { "title": "ldap://ldap.example.org:389", "state": ""  },
                                                                                 },
                                                                                 null, /* we should save the connection in the session */
