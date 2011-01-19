@@ -109,7 +109,7 @@ sub jstreemenu : Local {
         my $records = $c->model('DNSResolver')->srv($type."._tcp");
         push (@{ $connections->{$type} }, @{ $records }) if $records;
     }
-    print STDERR Data::Dumper->Dump([@connections]);
+    print STDERR Data::Dumper->Dump([$connections]);
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
