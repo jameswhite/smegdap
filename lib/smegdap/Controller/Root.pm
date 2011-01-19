@@ -142,9 +142,12 @@ sub createnode : Local {
             $c->detach();
         }
         print STDERR Data::Dumper->Dump([$connections]);
-        #foreach my $type(keys(%{ $connections }){
-             
-        #}
+        $c->response->headers->header( 'content-type' => "application/json" );
+        $c->res->body($self->json_wrap({
+                                         'status' => 0,
+                                         'structure' => $connections,
+                                       }));
+        $c->detach();
     }
     $c->response->headers->header( 'content-type' => "application/json" );
     $c->res->body($self->json_wrap({'status' => 0}));
