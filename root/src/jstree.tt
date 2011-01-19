@@ -121,7 +121,7 @@ function tree(){
                                                                                                 console.log(this);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                             }else{
-                                                                                                $(data.rslt.obj).attr("id", r.id);
+                                                                                            //    $(data.rslt.obj).attr("id", r.id);
                                                                                             }
                                                                                         }else {
                                                                                           $.jstree.rollback(data.rlbk);
