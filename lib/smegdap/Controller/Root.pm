@@ -53,7 +53,9 @@ sub default :Private {
     ############################################################################
     # Log us out if ?logout=1 was sent
     ############################################################################
-    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
+    if(defined($c->req->param("logout"))){ 
+        $c->forward('logout'); 
+    }
     ############################################################################
     # Attempt to authenticate if credentials were passed
     ############################################################################
@@ -85,6 +87,7 @@ sub default :Private {
 
 sub mobile_app :Private {
     my ( $self, $c ) = @_;
+    $c->stash->{'template'} = mobile_app.tt; 
 }
 
 sub application :Private {
