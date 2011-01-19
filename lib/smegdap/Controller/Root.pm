@@ -154,7 +154,7 @@ sub createnode : Local {
         $c->detach();
     }
     $c->response->headers->header( 'content-type' => "application/json" );
-    $c->res->body($self->json_wrap({'status' => 0}));
+    $c->res->body($self->json_wrap({'status' => 1}));
 }
 
 sub jstreemenu : Local {
