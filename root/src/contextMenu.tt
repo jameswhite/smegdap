@@ -2,12 +2,28 @@
 function contextMenu(clickeditem){
     if(clickeditem.attr("rel") == "drive"){
         return {
-                 "create" : {
+                 "domain" : {
                               "separator_before" : false,
                               "separator_after"  : true,
-                              "label"            : "add connections by domain",
+                              "label"            : "add a domain",
                               "action"           : function (obj) { 
-    console.log(obj);
+                                                                    this.create(
+                                                                                obj,
+                                                                                "last",
+                                                                                { 
+                                                                                  "attr": { "id"   : "", "rel"  : "folder" },
+                                                                                  "data": { "title": "", "state": ""  },
+                                                                                },
+                                                                                null, /* we should save the connection in the session */
+                                                                                0
+                                                                               ); 
+                                                                  }
+                            },
+                 "folder" : {
+                              "separator_before" : false,
+                              "separator_after"  : true,
+                              "label"            : "add a server group",
+                              "action"           : function (obj) { 
                                                                     this.create(
                                                                                 obj,
                                                                                 "last",
