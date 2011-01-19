@@ -4,7 +4,7 @@ function contextMenu(clickeditem){
         return {
                  "domain" : {
                               "separator_before" : false,
-                              "separator_after"  : true,
+                              "separator_after"  : false,
                               "label"            : "add a domain",
                               "action"           : function (obj) { 
                                                                     this.create(
@@ -21,7 +21,7 @@ function contextMenu(clickeditem){
                             },
                  "folder" : {
                               "separator_before" : false,
-                              "separator_after"  : true,
+                              "separator_after"  : false,
                               "label"            : "add a server group",
                               "action"           : function (obj) { 
                                                                     this.create(
@@ -53,21 +53,21 @@ function contextMenu(clickeditem){
                               "separator_after"  : true,
                               "label"            : "create",
                               "action"           : function (obj) { this.create(obj); }
-                      },
-                      "rename" : {
+                            },
+                 "rename" : {
                               "separator_before" : false,
                               "separator_after"  : false,
                               "label"            : "rename",
                               "action"           : function (obj) { this.rename(obj); }
-                      },
-                      "remove" : {
+                            },
+                 "remove" : {
                               "separator_before" : false,
                               "icon"             : false,
                               "separator_after"  : false,
                               "label"            : "delete",
                               "action"           : function (obj) { this.remove(obj); }
-                      },
-                      "ccp" : {
+                            },
+                 "ccp" :    {
                               "separator_before" : true,
                               "icon"             : false,
                               "separator_after"  : false,
@@ -94,8 +94,8 @@ function contextMenu(clickeditem){
                                                                  "label"            : "paste",
                                                                  "action"           : function (obj) { this.paste(obj); }
                                                                }
-                              }
-                       }
+                                                   }
+                            }
         }
     }
 };
