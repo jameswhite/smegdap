@@ -12,7 +12,7 @@ function contextMenu(clickeditem){
                                                                                 "last",
                                                                                 { 
                                                                                   "attr": { "id"   : "", "rel"  : "domain" },
-                                                                                  "data": { "title": "example.org", "state": ""  },
+                                                                                  "data": { "title": "websages.com", "state": ""  },
                                                                                 },
                                                                                 null, /* we should save the connection in the session */
                                                                                 0
