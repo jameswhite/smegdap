@@ -335,10 +335,10 @@ sub logout : Global {
     delete $c->session->{'username'};
     # expire our session
     $c->delete_session("logout");
-    $c->forward('default');
-    #$c->stash->{template}="default.tt";
-    #$c->res->redirect('/') if $justloggedout;
-    #$c->detach();
+    #$c->forward('default');
+    $c->stash->{template}="default.tt";
+    $c->res->redirect('/smegdap/') if $justloggedout;
+    $c->detach();
 }
 
 =head2 end
