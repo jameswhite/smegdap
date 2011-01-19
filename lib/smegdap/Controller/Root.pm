@@ -53,36 +53,28 @@ sub default :Private {
     ############################################################################
     # Log us out if ?logout=1 was sent
     ############################################################################
-    if(defined($c->req->param("logout"))){ 
-        $c->forward('logout'); 
+    if(defined($c->req->param("logout"))){ $c->forward('logout'); }
+    ############################################################################
+    # If we're logged in, send us to the appropriate application.
+    ############################################################################
+    if(defined $c->session->{'user'}){
+        if($c->req->user_agent=~m/iPhone/){ 
+            $c->forward("mobile_app"); 
+        }else{
+            $c->forward('application');
+        }
     }
     ############################################################################
     # Attempt to authenticate if credentials were passed
     ############################################################################
-    if( (defined($c->req->param("username")))&&(defined($c->req->param("password")))){
+    if( (defined($c->req->param("username"))) &&
+        (defined($c->req->param("password")))  ){
         $c->forward('login');
     }
     ############################################################################
     # If the session user isn't defined, forward to logout.
     ############################################################################
     if(! defined( $c->session->{'user'} )){ $c->forward('logout'); }
-    ############################################################################
-    # If we're logged in, send us to the application, othewise the login page.
-    ############################################################################
-    if(!defined $c->session->{'user'}){
-        if($c->req->user_agent=~m/iPhone/){ 
-            $c->stash->{'template'} = "mobile_login.tt";
-        }else{
-            $c->stash->{'template'} = "default.tt";
-        }
-        $c->detach();
-    }else{
-        if($c->req->user_agent=~m/iPhone/){ 
-            $c->forward("mobile_app"); 
-        }else{
-            $c->forward('application');
-        }
-   }
 }
 
 sub mobile_app :Private {
@@ -335,7 +327,7 @@ sub logout : Global {
     delete $c->session->{'username'};
     # expire our session
     $c->delete_session("logout");
-    #$c->forward('default');
+    # $c->forward('default');
     $c->stash->{template}="default.tt";
     $c->res->redirect('/smegdap/') if $justloggedout;
     $c->detach();
