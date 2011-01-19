@@ -104,7 +104,7 @@ sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
     my @connections; 
-    $c->model('DNSResovler')->domain("websages.com") );
+    $c->model('DNSResovler')->domain("websages.com");
     push( @connections, $c->model('DNSResovler')->srv("_ldap._tcp") );
     print STDERR Data::Dumper->Dump([@connections]);
     push( @{ $menu_tree }, [
