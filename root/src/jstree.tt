@@ -115,14 +115,8 @@ function tree(){
                                                                                         if (r.status) {
                                                                                             if (r.structure) {
                                                                                                 /* take the result's .structure and replace thie node with it */
+                                                                                                conssole.log(data.rslt.obj);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
-                                                                                                $('#certificate_tree').jstree.create( 
-                                                                                                                                      data.rslt.obj, 
-                                                                                                                                      "last",  
-                                                                                                                                      r.structure,
-                                                                                                                                      null
-                                                                                                                                     );
- 
                                                                                             }else{
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                             }
