@@ -118,7 +118,7 @@ function tree(){
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                                 console.log( data.rslt.obj.attr("id") );  
                                                                                             }else{
-                                                                                                $(data.rslt.obj).attr("id", "node_" + r.id);
+                                                                                                $(data.rslt.obj).attr("id", r.id);
                                                                                             }
                                                                                         }else {
                                                                                           $.jstree.rollback(data.rlbk);
