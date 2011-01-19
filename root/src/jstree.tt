@@ -117,9 +117,8 @@ function tree(){
                                                                                                 /* take the result's .children and replace thie node with it */
                                                                                                 console.log(data.rslt.obj);
          //$("#certificate_tree").jstree("create", data.rslt.obj, "inside",{ "data": { "title": "smeg" }, attr:{"id": "smeg", "rel": "default" }  }, function(){ alert("added"); }, true );
-         for(var child in r.children){
-         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", child , function(){ alert("added"); }, true );
-         }
+         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[0], function(){ alert("added"); }, true );
+         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[1], function(){ alert("added"); }, true );
                                                                                                 console.log(this);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                             }else{
