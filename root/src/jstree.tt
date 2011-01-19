@@ -116,13 +116,13 @@ function tree(){
                                                                                             if (r.structure) {
                                                                                                 /* take the result's .structure and replace thie node with it */
                                                                                                 $(data.rslt.obj).attr("id", r.id);
-                                                                                                $(#certificate_tree).jstree.create( data.rslt.obj, "last",  { 
+                                                                                                $('#certificate_tree').jstree.create( data.rslt.obj, "last",  { 
                                                                                                                                        "attr": { "id"   : "", "rel"  : "domain" },
                                                                                                                                        "data": { "title": "sub.websages.com", "state": ""  },
                                                                                                                                      },
                                                                                                                                      null, /* we should save the connection in the session */
                                                                                                                                      0
-                                                                                                           );
+                                                                                                                                  );
 
                                                                                             }else{
                                                                                                 $(data.rslt.obj).attr("id", r.id);
