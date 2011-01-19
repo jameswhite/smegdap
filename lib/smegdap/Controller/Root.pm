@@ -145,11 +145,7 @@ sub createnode : Local {
         $c->res->body($self->json_wrap({
                                          'status' => 1,
                                          'id'     => "$where:$therest",
-                                         'structure' => {
-                                                          'attr' => { 'id'    => "$therest", 'rel'   => 'folder' },
-                                                          'data' => { 'title' => "$therest", 'state' => ''       },
-                                                          'children' => $connections
-                                                        }
+                                         'children' => $connections
                                        }));
         $c->detach();
     }
