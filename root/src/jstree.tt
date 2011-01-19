@@ -91,7 +91,7 @@ function tree(){
                      .jstree("set_theme","default")
                      .bind("create.jstree", function (e, data) {
                                                                  $.post(
-                                                                         "/create/" + data.rslt.parent.attr("id").replace("node_","") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
+                                                                         "create/" + data.rslt.parent.attr("id").replace("node_","") + "/" + data.rslt.obj.attr("rel") + "/" + data.rslt.name, 
                                                                          { 
                                                                                  "operation" : "create_node", 
                                                                                  "id" : data.rslt.parent.attr("id").replace("node_",""), 

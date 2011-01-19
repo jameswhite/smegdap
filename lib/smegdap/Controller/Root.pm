@@ -103,6 +103,7 @@ sub application :Private {
 sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
+      
     my $connections; 
     $c->model('DNSResolver')->domain("websages.com");
     foreach my $type ("_tcp","_tls","_ssl"){
@@ -110,7 +111,9 @@ sub jstreemenu : Local {
         print STDERR Data::Dumper->Dump([$records]);
         push (@{ $connections->{$type} }, @{ $records }) if $records;
     }
-    print STDERR Data::Dumper->Dump([$connections]);
+    foreach my $type(keys(%{ $connections }){
+        push 
+    }
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
