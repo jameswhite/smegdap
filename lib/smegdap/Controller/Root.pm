@@ -123,7 +123,7 @@ sub createnode : Local {
         $c->model('DNSResolver')->domain($therest);
         foreach my $type ("tcp","tls","ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap."."_".$type);
-            my $children;
+            # my $children;
             #foreach my $record (@{ $records }){
             #    push(@{ $children },{
             #                          'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
@@ -133,8 +133,7 @@ sub createnode : Local {
             push(@{ $connections },{
                                      'attr' => { 'id'    => "$type", 'rel'   => 'folder' },
                                      'data' => { 'title' => "$type", 'state' => ''       },
-                                     'children' => $children,
-                                   }) if $children;
+                                   }) if $records;
         }
         if(!defined($connections)){
             $c->response->headers->header( 'content-type' => "application/json" );
