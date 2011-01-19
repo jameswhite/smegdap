@@ -127,12 +127,12 @@ sub createnode : Local {
             foreach my $record (@{ $records }){
                 push(@{ $children },{
                                       'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
-                                      'data' => { 'title' => "$record", 'state' => ''           }
+                                      'data' => { 'title' => "$record", 'state' => ''           },
                                     });
             }
             push(@{ $connections },{
                                      'attr' => { 'id'    => "$type", 'rel'   => 'connection' },
-                                     'data' => { 'title' => "$type", 'state' => ''           }
+                                     'data' => { 'title' => "$type", 'state' => ''           },
                                      'children' => $children,
                                    }) if $children;
         }
