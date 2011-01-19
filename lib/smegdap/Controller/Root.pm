@@ -334,11 +334,11 @@ sub logout : Global {
     # expire our session
     $c->delete_session("logout");
     if($c->req->user_agent=~m/iPhone/){ 
-            $c->stash->{template}="mobile_login.tt";
-            $c->detach();
-        }else{
-            $c->stash->{template}="default.tt";
-            $c->detach();
+        $c->stash->{template}="mobile_login.tt";
+        $c->detach();
+    }else{
+        $c->stash->{template}="default.tt";
+        $c->detach();
     }
     $c->detach();
 }
