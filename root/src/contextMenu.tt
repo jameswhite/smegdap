@@ -36,6 +36,7 @@ function contextMenu(clickeditem){
                                                                                ); 
                                                                   }
                             },
+/*
                  "server" : {
                               "separator_before" : false,
                               "separator_after"  : false,
@@ -48,11 +49,12 @@ function contextMenu(clickeditem){
                                                                                   "attr": { "id"   : "", "rel"  : "default" },
                                                                                   "data": { "title": "New Connection", "state": ""  },
                                                                                 },
-                                                                                null, /* we should save the connection in the session */
+                                                                                null, /* we should save the connection in the session 
                                                                                 0
                                                                                ); 
                                                                   }
                             },
+*/
                }
     }else if(clickeditem.attr("rel") == "logout"){
         return {
