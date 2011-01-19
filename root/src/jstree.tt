@@ -119,10 +119,7 @@ function tree(){
                                                                                                 this.create( 
                                                                                                                                       data.rslt.obj, 
                                                                                                                                       "last",  
-                                                                                                                                      { 
-                                                                                                                                        "attr": { "id"   : "smeg", "rel"  : "folder" },
-                                                                                                                                        "data": { "title" : "sub.websages.com", "state" : ""  },
-                                                                                                                                      },
+                                                                                                                                      r.structure,
                                                                                                                                       null,
                                                                                                                                       0
                                                                                                                                      );
