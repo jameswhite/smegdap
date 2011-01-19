@@ -113,8 +113,12 @@ function tree(){
                                                                          }, 
                                                                          function (r) {
                                                                                         if(r.status) {
-                                                                                            $(data.rslt.obj).attr("id", "node_" + r.id);
-                                                                                            /* take the $(data.rslt.obj).structure and replace thie node */
+                                                                                            if(r.structure) {
+                                                                                                /* take the $(data.rslt.obj).structure and replace thie node */
+                                                                                                $.jstree.rollback(data.rlbk);
+                                                                                            }else{
+                                                                                                $(data.rslt.obj).attr("id", "node_" + r.id);
+                                                                                            }
                                                                                         }
                                                                                         else 
                                                                                         {
