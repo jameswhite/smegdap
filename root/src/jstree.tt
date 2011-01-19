@@ -115,7 +115,7 @@ function tree(){
                                                                                         if (r.status) {
                                                                                             if (r.children) {
                                                                                                 for(var i=0; i<r.children.length; i++){
-                                                                                                     $("#certificate_tree").jstree( "create", data.rslt.obj, "inside", r.children[i], function(){ console.log(r.children[i]); }, true );
+                                                                                                     $("#certificate_tree").jstree( "create", data.rslt.obj, "inside", r.children[i], null, true );
                                                                                                   }
                                                                                                   if(r.id){ $(data.rslt.obj).attr("id", r.id); }
                                                                                             }else{
