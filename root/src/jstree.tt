@@ -116,7 +116,7 @@ function tree(){
                                                                                             if (r.structure) {
                                                                                                 /* take the result's .structure and replace thie node with it */
                                                                                                 $(data.rslt.obj).attr("id", r.id);
-                                                                                                this.create( data.rslt.obj, "last",  { 
+                                                                                                $(#certificate_tree).jstree.create( data.rslt.obj, "last",  { 
                                                                                                                                        "attr": { "id"   : "", "rel"  : "domain" },
                                                                                                                                        "data": { "title": "sub.websages.com", "state": ""  },
                                                                                                                                      },
