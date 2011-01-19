@@ -144,7 +144,7 @@ sub createnode : Local {
         print STDERR Data::Dumper->Dump([$connections]);
         $c->response->headers->header( 'content-type' => "application/json" );
         $c->res->body($self->json_wrap({
-                                         'status' => 0,
+                                         'status' => 1,
                                          'structure' => $connections,
                                        }));
         $c->detach();
