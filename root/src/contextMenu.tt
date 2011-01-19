@@ -11,7 +11,7 @@ function contextMenu(clickeditem){
                                                                                 obj,
                                                                                 "last",
                                                                                 { 
-                                                                                  "attr": { "id"   : "", "rel"  : "folder" },
+                                                                                  "attr": { "id"   : "", "rel"  : "domain" },
                                                                                   "data": { "title": "example.org", "state": ""  },
                                                                                 },
                                                                                 null, /* we should save the connection in the session */

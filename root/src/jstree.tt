@@ -50,8 +50,14 @@ function tree(){
                                                                                       "image" : "static/images/folder.png"
                                                                                       }
                                                                            },
-                                                               "drive"   : {
+                                                               "domain"  : {
                                                                              "valid_children" : [ "default", "folder" ],
+                                                                             "icon" : {
+                                                                                      "image" : "static/images/folder.png"
+                                                                                      }
+                                                                           },
+                                                               "drive"   : {
+                                                                             "valid_children" : [ "default", "folder", "domain" ],
                                                                              "icon" : {
                                                                                         "image" : "static/images/root.png"
                                                                                       },
