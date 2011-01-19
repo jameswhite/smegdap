@@ -133,7 +133,8 @@ sub createnode : Local {
             push(@{ $connections },{
                                      'attr' => { 'id'    => "$type", 'rel'   => 'connection' },
                                      'data' => { 'title' => "$type", 'state' => ''           }
-                                   });
+                                     'children' => $children;
+                                   }) if $children;
         }
         if(!defined($connections)){
             $c->response->headers->header( 'content-type' => "application/json" );
