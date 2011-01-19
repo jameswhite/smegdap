@@ -106,7 +106,6 @@ sub jstreemenu : Local {
     my @connections; 
     $c->model('DNSResolver')->domain("websages.com");
     push( @connections, @{ $c->model('DNSResolver')->srv("_ldap._tcp") });
-    push( @connections, @{ $c->model('DNSResolver')->srv("_ldap._ssl") });
     push( @connections, @{ $c->model('DNSResolver')->srv("_ldap._tls") });
     
     print STDERR Data::Dumper->Dump([$c->model('DNSResolver')->domain]);
