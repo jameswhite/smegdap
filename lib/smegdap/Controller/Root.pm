@@ -120,6 +120,7 @@ sub createnode : Local {
 
     #
     if($what eq 'domain'){
+        $c->model('DNSResolver')->domain($therest);
         foreach my $type ("_tcp","_tls","_ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap.".$type);
             push (@{ $connections->{$type} }, @{ $records }) if $records;
@@ -138,8 +139,6 @@ sub createnode : Local {
 sub jstreemenu : Local {
     my ( $self, $c ) = @_;
     my $menu_tree;
-      
-    $c->model('DNSResolver')->domain("websages.com");
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
