@@ -204,6 +204,7 @@ alert("enter");
                                                                           console.log( $("#certificate_tree").jstree("_get_text", trace) );
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
+                                                                      console.log( trace.attr("id") );
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,
