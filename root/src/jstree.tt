@@ -117,11 +117,12 @@ function tree(){
                                                                                                 /* take the result's .children and replace thie node with it */
                                                                                                 console.log(data.rslt.obj);
          //$("#certificate_tree").jstree("create", data.rslt.obj, "inside",{ "data": { "title": "smeg" }, attr:{"id": "smeg", "rel": "default" }  }, function(){ alert("added"); }, true );
-         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[0], function(){ alert("added"); }, true );
-         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[1], function(){ alert("added"); }, true );
+         for(var i=0; i<r.children.length; i++){
+         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.children[i], function(){ console.log(r.children[i]); }, true );
+         }
                                                                                                 console.log(this);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
-                                                                                            }else{
+                                                                                            //}else{
                                                                                             //    $(data.rslt.obj).attr("id", r.id);
                                                                                             }
                                                                                         }else {
