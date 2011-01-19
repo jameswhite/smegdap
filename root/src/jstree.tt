@@ -117,7 +117,7 @@ function tree(){
                                                                                                 /* take the result's .structure and replace thie node with it */
                                                                                                 console.log(data.rslt.obj);
          //$("#certificate_tree").jstree("create", data.rslt.obj, "inside",{ "data": { "title": "smeg" }, attr:{"id": "smeg", "rel": "default" }  }, function(){ alert("added"); }, true );
-         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.structure , attr:{"id": "smeg", "rel": "default" }  }, function(){ alert("added"); }, true );
+         $("#certificate_tree").jstree("create", data.rslt.obj, "inside", r.structure , function(){ alert("added"); }, true );
                                                                                                 console.log(this);
                                                                                                 $(data.rslt.obj).attr("id", r.id);
                                                                                             }else{
