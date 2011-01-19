@@ -124,7 +124,7 @@ sub createnode : Local {
         foreach my $type ("tcp","tls","ssl"){
             my $records = $c->model('DNSResolver')->srv("_ldap."."_".$type);
             my $children;
-            foreach my $record (@{ $records }){
+            #foreach my $record (@{ $records }){
             #    push(@{ $children },{
             #                          'attr' => { 'id'    => "$record", 'rel'   => 'connection' },
             #                          'data' => { 'title' => "$record", 'state' => ''           },
