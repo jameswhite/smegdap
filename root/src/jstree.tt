@@ -112,25 +112,13 @@ function tree(){
                                                                                  "type" : data.rslt.obj.attr("rel")
                                                                          }, 
                                                                          function (r) {
-                                                                                        if(r.status) {
-                                                                                            if(r.structure) {
+                                                                                        if (r.status) {
+                                                                                            if (r.structure) {
                                                                                                 /* take the $(data.rslt.obj).structure and replace thie node */
-                                                                                                $.jstree.rollback(data.rlbk);
-                                                                                                function (obj) {
-                                                                                                  this.create(
-                                                                                                               obj,
-                                                                                                               "last",
-                                                                                                               r.structure,
-                                                                                                               null, /* we should save the connection in the session */
-                                                                                                               0
-                                                                                                              );
-                                                                                                 }
                                                                                             }else{
-                                                                                                $(data.rslt.obj).attr("id", "node_" + r.id);
+                                                                                                $(data.rslt.obj) = r.structure;
                                                                                             }
-                                                                                        }
-                                                                                        else 
-                                                                                        {
+                                                                                        }else{
                                                                                           $.jstree.rollback(data.rlbk);
                                                                                         }
                                                                                       }
