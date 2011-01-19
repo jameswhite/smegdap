@@ -120,8 +120,7 @@ function tree(){
                                                                                                                                       data.rslt.obj, 
                                                                                                                                       "last",  
                                                                                                                                       r.structure,
-                                                                                                                                      null,
-                                                                                                                                      true
+                                                                                                                                      null
                                                                                                                                      );
  
                                                                                             }else{
