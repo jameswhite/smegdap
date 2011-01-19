@@ -200,7 +200,7 @@ alert("enter");
                                                                       var trace = data.rslt.obj;
                                                                       var count=0;
                                                                       while( trace.attr("id") != "certificate_tree" && count++ < 5 ){
-                                                                          console.log( $("#certificate_tree").jstree.attr("id") );
+                                                                          console.log( trace.attr("id") );
                                                                           console.log( $("#certificate_tree").jstree("_get_text", trace) );
                                                                           trace = $("#certificate_tree").jstree("_get_parent", trace);
                                                                       }
