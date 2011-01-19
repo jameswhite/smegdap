@@ -111,9 +111,8 @@ sub jstreemenu : Local {
         print STDERR Data::Dumper->Dump([$records]);
         push (@{ $connections->{$type} }, @{ $records }) if $records;
     }
-    foreach my $type(keys(%{ $connections }){
-        push 
-    }
+    #foreach my $type(keys(%{ $connections }){
+    #}
     push( @{ $menu_tree }, [
                              {
                                'attr' => { 'id' => 'connections', "rel" => "drive"},
