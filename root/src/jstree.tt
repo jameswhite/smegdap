@@ -196,18 +196,6 @@ function tree(){
                                                                       $("#certificate_tree").jstree("toggle_node", data.rslt.obj);
                                                                       $("#certificate_tree").jstree("deselect_node", data.rslt.obj);
                                                                       */
-                                                                      var trace = data.rslt.obj;
-                                                                      var count=0;
-                                                                      while( trace.attr("id") != "certificate_tree" && count++ < 5 ){
-                                                                          console.log({"id": trace.attr("id"), "count": count });
-                                                                          //console.log( trace.attr("id") );
-                                                                          var txt = $("#certificate_tree").jstree("_get_text", trace);
-                                                                          console.log(txt);
-                                                                          trace = trace.parent;
-                                                                      }
-                                                                      console.log({"id": trace.attr("id"), "count": count });
-                                                                      var txt = $("#certificate_tree").jstree("_get_text", trace);
-                                                                      console.log(txt);
                                                                       $("#right-pane").load("form/" + data.rslt.obj.attr("id"));
                                                                       $.ajax({
                                                                                async : false,

@@ -4,6 +4,7 @@ function contextMenu(clickeditem){
     case "drive":
     case "domain":
         return {
+/*
                  "domain" : {
                               "separator_before" : false,
                               "separator_after"  : false,
@@ -16,7 +17,7 @@ function contextMenu(clickeditem){
                                                                                   "attr": { "id"   : "", "rel"  : "domain" },
                                                                                   "data": { "title": "websages.com", "state": ""  },
                                                                                 },
-                                                                                null, /* we should save the connection in the session */
+                                                                                null, // we should save the connection in the session
                                                                                 0
                                                                                ); 
                                                                   }
@@ -33,11 +34,12 @@ function contextMenu(clickeditem){
                                                                                   "attr": { "id"   : "", "rel"  : "folder" },
                                                                                   "data": { "title": "New_Connection_Group", "state": ""  },
                                                                                 },
-                                                                                null, /* we should save the connection in the session */
+                                                                                null, // we should save the connection in the session 
                                                                                 0
                                                                                ); 
                                                                   }
                             },
+*/
                  "server" : {
                               "separator_before" : false,
                               "separator_after"  : false,
