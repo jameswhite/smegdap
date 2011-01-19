@@ -62,8 +62,10 @@ sub default :Private {
         print STDERR "user defined";
         if($c->req->user_agent=~m/iPhone/){ 
             $c->forward("mobile_app"); 
+            $c->detach();
         }else{
             $c->forward('application');
+            $c->detach();
         }
     }
     ############################################################################
