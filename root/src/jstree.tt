@@ -203,7 +203,7 @@ function tree(){
                                                                           //console.log( trace.attr("id") );
                                                                           var txt = $("#certificate_tree").jstree("_get_text", trace);
                                                                           console.log(txt);
-                                                                          trace = $("#certificate_tree").jstree("_get_parent", trace);
+                                                                          trace = trace.parent;
                                                                       }
                                                                       console.log({"id": trace.attr("id"), "count": count });
                                                                       var txt = $("#certificate_tree").jstree("_get_text", trace);
