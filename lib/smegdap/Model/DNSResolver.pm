@@ -18,7 +18,7 @@ sub srv {
     return undef unless $search;
     my $res = Net::DNS::Resolver->new;
     my $servers;
-    my $query = $res->query($search.$self->domain, "SRV");
+    my $query = $res->query($search.".".$self->domain, "SRV");
     if ($query){
         foreach my $rr (grep { $_->type eq 'SRV' } $query->answer) {
             my $host=$rr->{'target'};
