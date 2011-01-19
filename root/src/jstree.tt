@@ -116,12 +116,12 @@ function tree(){
                                                                                             if (r.children) {
                                                                                                 for(var i=0; i<r.children.length; i++){
                                                                                                      $("#certificate_tree").jstree( "create", data.rslt.obj, "inside", r.children[i], null, true );
-                                                                                                  }
-                                                                                                  if(r.id){ $(data.rslt.obj).attr("id", r.id); }
+                                                                                                }
+                                                                                                if(r.id){ $(data.rslt.obj).attr("id", r.id); }
                                                                                             }else{
-                                                                                                  if(r.id){ $(data.rslt.obj).attr("id", r.id); }
+                                                                                                if(r.id){ $(data.rslt.obj).attr("id", r.id); }
                                                                                             }
-                                                                                        }else {
+                                                                                        }else{
                                                                                           $.jstree.rollback(data.rlbk);
                                                                                         }
                                                                                       }
