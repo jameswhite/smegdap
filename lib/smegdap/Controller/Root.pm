@@ -53,6 +53,7 @@ sub default :Private {
     $c->require_ssl;
     if( $c->request->arguments->[0]){
         if( $c->request->arguments->[0] eq "static"){
+            print STDERR "\n-=[STATIC]=-\n\n";
             $c->detach();
         }
     }
